@@ -1,0 +1,283 @@
+{
+  "name": "marshmallow",
+  "version": "4.0.0",
+  "build": "pyhd8ed1ab_0",
+  "build_number": 0,
+  "channel": "https://conda.anaconda.org/conda-forge/noarch",
+  "subdir": "noarch",
+  "fn": "marshmallow-4.0.0-pyhd8ed1ab_0.conda",
+  "md5": "35e11f25c0ce3be2cd1a0bf7e192f8c5",
+  "url": "https://conda.anaconda.org/conda-forge/noarch/marshmallow-4.0.0-pyhd8ed1ab_0.conda",
+  "sha256": "56640641e0fb4258731968b0ec9acdeb4e0522c6af4d6e081c99686d77aa4d50",
+  "depends": [
+    "backports-datetime-fromisoformat",
+    "python >=3.9",
+    "typing_extensions"
+  ],
+  "constrains": [],
+  "noarch": "python",
+  "license": "MIT AND BSD-3-Clause",
+  "package_type": "noarch_python",
+  "timestamp": 1744900070000,
+  "size": 90732,
+  "requested_spec": "marshmallow",
+  "package_tarball_full_path": "C:\\Users\\minto\\miniconda3\\pkgs\\marshmallow-4.0.0-pyhd8ed1ab_0.conda",
+  "extracted_package_dir": "C:\\Users\\minto\\miniconda3\\pkgs\\marshmallow-4.0.0-pyhd8ed1ab_0",
+  "files": [
+    "Lib/site-packages/marshmallow-4.0.0.dist-info/INSTALLER",
+    "Lib/site-packages/marshmallow-4.0.0.dist-info/METADATA",
+    "Lib/site-packages/marshmallow-4.0.0.dist-info/RECORD",
+    "Lib/site-packages/marshmallow-4.0.0.dist-info/REQUESTED",
+    "Lib/site-packages/marshmallow-4.0.0.dist-info/WHEEL",
+    "Lib/site-packages/marshmallow-4.0.0.dist-info/direct_url.json",
+    "Lib/site-packages/marshmallow-4.0.0.dist-info/licenses/LICENSE",
+    "Lib/site-packages/marshmallow/__init__.py",
+    "Lib/site-packages/marshmallow/class_registry.py",
+    "Lib/site-packages/marshmallow/constants.py",
+    "Lib/site-packages/marshmallow/decorators.py",
+    "Lib/site-packages/marshmallow/error_store.py",
+    "Lib/site-packages/marshmallow/exceptions.py",
+    "Lib/site-packages/marshmallow/experimental/__init__.py",
+    "Lib/site-packages/marshmallow/experimental/context.py",
+    "Lib/site-packages/marshmallow/fields.py",
+    "Lib/site-packages/marshmallow/orderedset.py",
+    "Lib/site-packages/marshmallow/py.typed",
+    "Lib/site-packages/marshmallow/schema.py",
+    "Lib/site-packages/marshmallow/types.py",
+    "Lib/site-packages/marshmallow/utils.py",
+    "Lib/site-packages/marshmallow/validate.py",
+    "Lib/site-packages/marshmallow/__pycache__/__init__.cpython-313.pyc",
+    "Lib/site-packages/marshmallow/__pycache__/class_registry.cpython-313.pyc",
+    "Lib/site-packages/marshmallow/__pycache__/constants.cpython-313.pyc",
+    "Lib/site-packages/marshmallow/__pycache__/decorators.cpython-313.pyc",
+    "Lib/site-packages/marshmallow/__pycache__/error_store.cpython-313.pyc",
+    "Lib/site-packages/marshmallow/__pycache__/exceptions.cpython-313.pyc",
+    "Lib/site-packages/marshmallow/experimental/__pycache__/__init__.cpython-313.pyc",
+    "Lib/site-packages/marshmallow/experimental/__pycache__/context.cpython-313.pyc",
+    "Lib/site-packages/marshmallow/__pycache__/fields.cpython-313.pyc",
+    "Lib/site-packages/marshmallow/__pycache__/orderedset.cpython-313.pyc",
+    "Lib/site-packages/marshmallow/__pycache__/schema.cpython-313.pyc",
+    "Lib/site-packages/marshmallow/__pycache__/types.cpython-313.pyc",
+    "Lib/site-packages/marshmallow/__pycache__/utils.cpython-313.pyc",
+    "Lib/site-packages/marshmallow/__pycache__/validate.cpython-313.pyc"
+  ],
+  "paths_data": {
+    "paths_version": 1,
+    "paths": [
+      {
+        "_path": "site-packages/marshmallow-4.0.0.dist-info/INSTALLER",
+        "path_type": "hardlink",
+        "sha256": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "size_in_bytes": 5,
+        "sha256_in_prefix": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8"
+      },
+      {
+        "_path": "site-packages/marshmallow-4.0.0.dist-info/METADATA",
+        "path_type": "hardlink",
+        "sha256": "52c279d4a2eac34b5c46b6197e808bde68bb7b51ddf7e4c529f45660721610c4",
+        "size_in_bytes": 7432,
+        "sha256_in_prefix": "52c279d4a2eac34b5c46b6197e808bde68bb7b51ddf7e4c529f45660721610c4"
+      },
+      {
+        "_path": "site-packages/marshmallow-4.0.0.dist-info/RECORD",
+        "path_type": "hardlink",
+        "sha256": "57b6fb5fc90f745cadcdc87dfa4e8c8d965b041347e9e7f5fcd65bda2dbd4527",
+        "size_in_bytes": 2592,
+        "sha256_in_prefix": "57b6fb5fc90f745cadcdc87dfa4e8c8d965b041347e9e7f5fcd65bda2dbd4527"
+      },
+      {
+        "_path": "site-packages/marshmallow-4.0.0.dist-info/REQUESTED",
+        "path_type": "hardlink",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_in_bytes": 0,
+        "sha256_in_prefix": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "_path": "site-packages/marshmallow-4.0.0.dist-info/WHEEL",
+        "path_type": "hardlink",
+        "sha256": "1b68144734c4b66791f27add5d425f3620775585718a03d0f9b110ba3a4d88db",
+        "size_in_bytes": 82,
+        "sha256_in_prefix": "1b68144734c4b66791f27add5d425f3620775585718a03d0f9b110ba3a4d88db"
+      },
+      {
+        "_path": "site-packages/marshmallow-4.0.0.dist-info/direct_url.json",
+        "path_type": "hardlink",
+        "sha256": "ad9a166ff2f93889ce09935e46d25f423f174383b14b77174f08c63913f86ab4",
+        "size_in_bytes": 107,
+        "sha256_in_prefix": "ad9a166ff2f93889ce09935e46d25f423f174383b14b77174f08c63913f86ab4"
+      },
+      {
+        "_path": "site-packages/marshmallow-4.0.0.dist-info/licenses/LICENSE",
+        "path_type": "hardlink",
+        "sha256": "906b5d9051e426144cb173ad911667b8ebd05a9c584c2c26c135b32a3ed12001",
+        "size_in_bytes": 1064,
+        "sha256_in_prefix": "906b5d9051e426144cb173ad911667b8ebd05a9c584c2c26c135b32a3ed12001"
+      },
+      {
+        "_path": "site-packages/marshmallow/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "1041ebdb8987876907fe9b33c5d9d3a0e7c11ba676c2a78e29b6f48a20c616fe",
+        "size_in_bytes": 587,
+        "sha256_in_prefix": "1041ebdb8987876907fe9b33c5d9d3a0e7c11ba676c2a78e29b6f48a20c616fe"
+      },
+      {
+        "_path": "site-packages/marshmallow/class_registry.py",
+        "path_type": "hardlink",
+        "sha256": "1d30bdb2b084691b22cb92ffbd4290b28ec841f7997915f165fcf8ff6362b683",
+        "size_in_bytes": 3029,
+        "sha256_in_prefix": "1d30bdb2b084691b22cb92ffbd4290b28ec841f7997915f165fcf8ff6362b683"
+      },
+      {
+        "_path": "site-packages/marshmallow/constants.py",
+        "path_type": "hardlink",
+        "sha256": "99a6264f7a6f8d081fba69a87f8e52248fe90ea1c31564aede49d537bb2eefc3",
+        "size_in_bytes": 374,
+        "sha256_in_prefix": "99a6264f7a6f8d081fba69a87f8e52248fe90ea1c31564aede49d537bb2eefc3"
+      },
+      {
+        "_path": "site-packages/marshmallow/decorators.py",
+        "path_type": "hardlink",
+        "sha256": "0b00f7eee8a1f1ccaabb0606bfea8a54f514b4a9a3e2d81ab38e402b04dd9599",
+        "size_in_bytes": 9987,
+        "sha256_in_prefix": "0b00f7eee8a1f1ccaabb0606bfea8a54f514b4a9a3e2d81ab38e402b04dd9599"
+      },
+      {
+        "_path": "site-packages/marshmallow/error_store.py",
+        "path_type": "hardlink",
+        "sha256": "8823d2770f27246892e1f8d6b88018d5a488fc785c91c768de5fe0fbba6368cc",
+        "size_in_bytes": 2240,
+        "sha256_in_prefix": "8823d2770f27246892e1f8d6b88018d5a488fc785c91c768de5fe0fbba6368cc"
+      },
+      {
+        "_path": "site-packages/marshmallow/exceptions.py",
+        "path_type": "hardlink",
+        "sha256": "0856fb5dbe0a348aac5b2725e9c51896b4051b234147bce6d7c1c8d016d7b3f2",
+        "size_in_bytes": 2335,
+        "sha256_in_prefix": "0856fb5dbe0a348aac5b2725e9c51896b4051b234147bce6d7c1c8d016d7b3f2"
+      },
+      {
+        "_path": "site-packages/marshmallow/experimental/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "e7f89a5264fbfdfe9030bd8b257980df1aa093950102009e21acc7b42d465607",
+        "size_in_bytes": 147,
+        "sha256_in_prefix": "e7f89a5264fbfdfe9030bd8b257980df1aa093950102009e21acc7b42d465607"
+      },
+      {
+        "_path": "site-packages/marshmallow/experimental/context.py",
+        "path_type": "hardlink",
+        "sha256": "ff8285eac34aea913431c932613197994de124bdad63e4cde2856613f783a1bd",
+        "size_in_bytes": 2040,
+        "sha256_in_prefix": "ff8285eac34aea913431c932613197994de124bdad63e4cde2856613f783a1bd"
+      },
+      {
+        "_path": "site-packages/marshmallow/fields.py",
+        "path_type": "hardlink",
+        "sha256": "088a6743f3335fa878ff23bcd664749c9837e028ef89e198150ecc40ec9c50e3",
+        "size_in_bytes": 72081,
+        "sha256_in_prefix": "088a6743f3335fa878ff23bcd664749c9837e028ef89e198150ecc40ec9c50e3"
+      },
+      {
+        "_path": "site-packages/marshmallow/orderedset.py",
+        "path_type": "hardlink",
+        "sha256": "f8babcdc0588205b366f1a6d0f0907b5f43adde6d7dd60f747a377079ad19d52",
+        "size_in_bytes": 2936,
+        "sha256_in_prefix": "f8babcdc0588205b366f1a6d0f0907b5f43adde6d7dd60f747a377079ad19d52"
+      },
+      {
+        "_path": "site-packages/marshmallow/py.typed",
+        "path_type": "hardlink",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_in_bytes": 0,
+        "sha256_in_prefix": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "_path": "site-packages/marshmallow/schema.py",
+        "path_type": "hardlink",
+        "sha256": "7c8175337252f30c0dc6bcdc84fec786bb5c0c49fe2ab2ebba32ea6a503ce12f",
+        "size_in_bytes": 49904,
+        "sha256_in_prefix": "7c8175337252f30c0dc6bcdc84fec786bb5c0c49fe2ab2ebba32ea6a503ce12f"
+      },
+      {
+        "_path": "site-packages/marshmallow/types.py",
+        "path_type": "hardlink",
+        "sha256": "100332a697038c3992779ec85a905193944563ab8fa08f02bc3af8a4b6815e3f",
+        "size_in_bytes": 1297,
+        "sha256_in_prefix": "100332a697038c3992779ec85a905193944563ab8fa08f02bc3af8a4b6815e3f"
+      },
+      {
+        "_path": "site-packages/marshmallow/utils.py",
+        "path_type": "hardlink",
+        "sha256": "4f4e4590dd92df3dc17358c5ea17e703d8c911a52a50b237a7ad1b1a014bf057",
+        "size_in_bytes": 5467,
+        "sha256_in_prefix": "4f4e4590dd92df3dc17358c5ea17e703d8c911a52a50b237a7ad1b1a014bf057"
+      },
+      {
+        "_path": "site-packages/marshmallow/validate.py",
+        "path_type": "hardlink",
+        "sha256": "5faba1522afed83a9457328c90437a23c2eb2cf27599b2fc4440918200729655",
+        "size_in_bytes": 23931,
+        "sha256_in_prefix": "5faba1522afed83a9457328c90437a23c2eb2cf27599b2fc4440918200729655"
+      },
+      {
+        "_path": "Lib/site-packages/marshmallow/__pycache__/__init__.cpython-313.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/marshmallow/__pycache__/class_registry.cpython-313.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/marshmallow/__pycache__/constants.cpython-313.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/marshmallow/__pycache__/decorators.cpython-313.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/marshmallow/__pycache__/error_store.cpython-313.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/marshmallow/__pycache__/exceptions.cpython-313.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/marshmallow/experimental/__pycache__/__init__.cpython-313.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/marshmallow/experimental/__pycache__/context.cpython-313.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/marshmallow/__pycache__/fields.cpython-313.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/marshmallow/__pycache__/orderedset.cpython-313.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/marshmallow/__pycache__/schema.cpython-313.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/marshmallow/__pycache__/types.cpython-313.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/marshmallow/__pycache__/utils.cpython-313.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/marshmallow/__pycache__/validate.cpython-313.pyc",
+        "path_type": "pyc_file"
+      }
+    ]
+  },
+  "link": {
+    "source": "C:\\Users\\minto\\miniconda3\\pkgs\\marshmallow-4.0.0-pyhd8ed1ab_0",
+    "type": 1
+  }
+}

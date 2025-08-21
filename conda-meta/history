@@ -110,3 +110,14 @@
 +defaults/win-64::pygments-2.19.1-py313haa95532_0
 +defaults/win-64::pytest-8.4.1-py313haa95532_0
 # update specs: ['pytest']
+==> 2025-08-21 04:40:15 <==
+# cmd: C:\Users\minto\miniconda3\Scripts\conda-script.py install -c conda-forge marshmallow
+# conda version: 25.7.0
+-defaults/win-64::ca-certificates-2025.7.15-haa95532_0
+-defaults/win-64::openssl-3.0.17-h35632f6_0
++conda-forge/noarch::ca-certificates-2025.8.3-h4c7d964_0
++conda-forge/noarch::marshmallow-4.0.0-pyhd8ed1ab_0
++conda-forge/noarch::typing_extensions-4.14.1-pyhe01879c_0
++conda-forge/win-64::backports-datetime-fromisoformat-2.0.3-py313hfa70ccb_1
++conda-forge/win-64::openssl-3.5.2-h725018a_0
+# update specs: ['marshmallow']

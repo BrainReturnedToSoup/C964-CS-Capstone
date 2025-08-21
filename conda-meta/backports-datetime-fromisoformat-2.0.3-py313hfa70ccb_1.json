@@ -1,0 +1,32 @@
+{
+  "name": "backports-datetime-fromisoformat",
+  "version": "2.0.3",
+  "build": "py313hfa70ccb_1",
+  "build_number": 1,
+  "channel": "https://conda.anaconda.org/conda-forge/noarch",
+  "subdir": "win-64",
+  "fn": "backports-datetime-fromisoformat-2.0.3-py313hfa70ccb_1.conda",
+  "md5": "52467f8a2f94e093552fbc17a3c6b3eb",
+  "url": "https://conda.anaconda.org/conda-forge/win-64/backports-datetime-fromisoformat-2.0.3-py313hfa70ccb_1.conda",
+  "sha256": "70bac39eca5b8e0fe2036010f9f2d4845ec39792f2c40c208e317da110fea88f",
+  "depends": [
+    "python >=3.13,<3.14.0a0",
+    "python_abi 3.13.* *_cp313"
+  ],
+  "constrains": [],
+  "license": "MIT",
+  "timestamp": 1755766016000,
+  "size": 7767,
+  "requested_spec": "None",
+  "package_tarball_full_path": "C:\\Users\\minto\\miniconda3\\pkgs\\backports-datetime-fromisoformat-2.0.3-py313hfa70ccb_1.conda",
+  "extracted_package_dir": "C:\\Users\\minto\\miniconda3\\pkgs\\backports-datetime-fromisoformat-2.0.3-py313hfa70ccb_1",
+  "files": [],
+  "paths_data": {
+    "paths_version": 1,
+    "paths": []
+  },
+  "link": {
+    "source": "C:\\Users\\minto\\miniconda3\\pkgs\\backports-datetime-fromisoformat-2.0.3-py313hfa70ccb_1",
+    "type": 1
+  }
+}
