@@ -6,5 +6,3 @@ bp = Blueprint("root", __name__, url_prefix="/")
 
 # register immediate children routes
 bp.register_blueprint(child_bp)
-
-__all__ = ["bp"]

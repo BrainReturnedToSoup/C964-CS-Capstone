@@ -1,7 +1,7 @@
 from flask import Request
 from flask import Response
 
-from logging.log_factory.interface import Log_Factory_Interface as Logger_Interface
+from logging.log_factory.interface import Log_Factory as Logger_Interface
 
 class Controller:
     def __init__(self, logger: Logger_Interface):
@@ -12,5 +12,3 @@ class Controller:
     def handle(self, req: Request) -> Response:
         
         return
-    
-__all__ = ["Controller"]
