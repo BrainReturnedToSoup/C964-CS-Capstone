@@ -1,0 +1,102 @@
+{
+  "name": "libavif",
+  "version": "1.1.1",
+  "build": "h827c3e9_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/win-64",
+  "subdir": "win-64",
+  "fn": "libavif-1.1.1-h827c3e9_0.conda",
+  "md5": "fbe7746c576e99a71bc5501acf00be2a",
+  "url": "https://repo.anaconda.com/pkgs/main/win-64/libavif-1.1.1-h827c3e9_0.conda",
+  "sha256": "21f8e56de7d880e63a3fab1a8ea16b9c371278b103eac78f8ab46ff1c89e25a1",
+  "depends": [
+    "aom >=3.6.0,<3.7.0a0",
+    "dav1d >=1.2.1,<1.2.2.0a0",
+    "vc >=14.2,<15.0a0",
+    "vs2015_runtime >=14.29.30133,<15.0a0"
+  ],
+  "constrains": [],
+  "license": "BSD-2-Clause",
+  "timestamp": 1733820059000,
+  "size": 2042054,
+  "requested_spec": "None",
+  "package_tarball_full_path": "C:\\Users\\minto\\miniconda3\\pkgs\\libavif-1.1.1-h827c3e9_0.conda",
+  "extracted_package_dir": "C:\\Users\\minto\\miniconda3\\pkgs\\libavif-1.1.1-h827c3e9_0",
+  "files": [
+    "Library/bin/avif.dll",
+    "Library/include/avif/avif.h",
+    "Library/include/avif/avif_cxx.h",
+    "Library/lib/avif.lib",
+    "Library/lib/cmake/libavif/libavif-config-release.cmake",
+    "Library/lib/cmake/libavif/libavif-config-version.cmake",
+    "Library/lib/cmake/libavif/libavif-config.cmake",
+    "Library/lib/pkgconfig/libavif.pc"
+  ],
+  "paths_data": {
+    "paths_version": 1,
+    "paths": [
+      {
+        "_path": "Library/bin/avif.dll",
+        "path_type": "hardlink",
+        "sha256": "33e235ff9d9a20a4e3756bac4963a9369f76c9f66e2787bcfb497a62ea4a6038",
+        "size_in_bytes": 9947408,
+        "sha256_in_prefix": "33e235ff9d9a20a4e3756bac4963a9369f76c9f66e2787bcfb497a62ea4a6038"
+      },
+      {
+        "_path": "Library/include/avif/avif.h",
+        "path_type": "hardlink",
+        "sha256": "86bfebbf8f5c6fd06fc9424d82f85b75c4a00696009b76a8cd9196b8ab8f00fe",
+        "size_in_bytes": 83366,
+        "sha256_in_prefix": "86bfebbf8f5c6fd06fc9424d82f85b75c4a00696009b76a8cd9196b8ab8f00fe"
+      },
+      {
+        "_path": "Library/include/avif/avif_cxx.h",
+        "path_type": "hardlink",
+        "sha256": "fc00d268caf79e9f825256ed4b74e6a93f8e6002f625e823cb5c09b441925262",
+        "size_in_bytes": 916,
+        "sha256_in_prefix": "fc00d268caf79e9f825256ed4b74e6a93f8e6002f625e823cb5c09b441925262"
+      },
+      {
+        "_path": "Library/lib/avif.lib",
+        "path_type": "hardlink",
+        "sha256": "2d36ed7d8a978e8261d458fb02239383f9b780b7633b3131de6a62ec221f3c5c",
+        "size_in_bytes": 20490,
+        "sha256_in_prefix": "2d36ed7d8a978e8261d458fb02239383f9b780b7633b3131de6a62ec221f3c5c"
+      },
+      {
+        "_path": "Library/lib/cmake/libavif/libavif-config-release.cmake",
+        "path_type": "hardlink",
+        "sha256": "5a7991020b7bb7d5c80ae7a36869527d424c1daf5aaa5adc99a764b7b6160f48",
+        "size_in_bytes": 848,
+        "sha256_in_prefix": "5a7991020b7bb7d5c80ae7a36869527d424c1daf5aaa5adc99a764b7b6160f48"
+      },
+      {
+        "_path": "Library/lib/cmake/libavif/libavif-config-version.cmake",
+        "path_type": "hardlink",
+        "sha256": "a0c25e4c3d12df9ec560f996476a5c412fe314df7b11caa1a7cc1a103fe32589",
+        "size_in_bytes": 2827,
+        "sha256_in_prefix": "a0c25e4c3d12df9ec560f996476a5c412fe314df7b11caa1a7cc1a103fe32589"
+      },
+      {
+        "_path": "Library/lib/cmake/libavif/libavif-config.cmake",
+        "path_type": "hardlink",
+        "sha256": "37454c34e94444edfe09fa8db82e4296242a84aa21be359084fe1b99a45c4324",
+        "size_in_bytes": 4005,
+        "sha256_in_prefix": "37454c34e94444edfe09fa8db82e4296242a84aa21be359084fe1b99a45c4324"
+      },
+      {
+        "_path": "Library/lib/pkgconfig/libavif.pc",
+        "prefix_placeholder": "C:/b/abs_fcjbxqp6pb/croot/libavif_1733819948431/_h_env",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "sha256": "23ff3c94b3a19d759a363bfa0da6cc788b11bb873cdff384d8aeb7617c8ca874",
+        "size_in_bytes": 378,
+        "sha256_in_prefix": "43b8f5d4cf4af0cb8178d61e20aa3ee4ba94fa9187da648038517356178e0beb"
+      }
+    ]
+  },
+  "link": {
+    "source": "C:\\Users\\minto\\miniconda3\\pkgs\\libavif-1.1.1-h827c3e9_0",
+    "type": 1
+  }
+}

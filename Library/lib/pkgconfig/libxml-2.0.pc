@@ -1,0 +1,11 @@
+prefix=C:/Users/minto/repo/C964-CS-Capstone/Library 
+exec_prefix=C:/Users/minto/repo/C964-CS-Capstone/Library 
+libdir=C:/Users/minto/repo/C964-CS-Capstone/Library/lib 
+includedir=C:/Users/minto/repo/C964-CS-Capstone/Library/include 
+modules=0 
+Name: libXML 
+Version: 2.13.8 
+Description: libXML library version2. 
+Requires: 
+Libs: -LC:/Users/minto/repo/C964-CS-Capstone/Library/lib -lxml2 -liconv -lz 
+Cflags: -IC:/Users/minto/repo/C964-CS-Capstone/Library/include/libxml2 -IC:/Users/minto/repo/C964-CS-Capstone/Library/include 
