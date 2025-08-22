@@ -1,7 +1,7 @@
 import joblib
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
-from logging.logger_instance import logger
+from custom_logging.logger_instance import logger
 from services.predict.impl import Predicter
 
 pretrained_model=joblib.load("../../static/model.pkl")

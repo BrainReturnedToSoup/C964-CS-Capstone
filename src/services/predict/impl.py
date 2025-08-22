@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import GradientBoostingRegressor
 
-from logging.log_factory.interface import Log_Factory as Log_Factory_Interface
+from custom_logging.log_factory.interface import Log_Factory as Log_Factory_Interface
 from services.predict.interface import Predicter as Predicter_Interface
 from services.predict.interface import Prediction_Input, Prediction_Output
 from services.predict.interface import Neighborhood

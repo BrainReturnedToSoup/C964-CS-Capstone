@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from logging.handler.interface import Handler as Handler_Interface
+from custom_logging.handler.interface import Handler as Handler_Interface
 
 class Log(ABC):
     @abstractmethod
