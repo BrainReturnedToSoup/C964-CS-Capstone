@@ -1,11 +1,10 @@
 import pytest
-import numpy as np
-import pandas as pd
 from marshmallow import ValidationError
+import numpy as np
 from custom_logging.logger_instance import logger
 from .impl import Predicter
 from .interface import Prediction_Input, NEIGHBORHOOD
-from .static import housing_price_dataset_df, truncated_and_scaled_df, pretrained_gbr_model, prefit_scaler, input_columns, testX, testY, deltasY
+from static.loader import pretrained_gbr_model, prefit_scaler, trainX, trainX_renamed_scaled_ordered, testX, testY, deltasY
 
 # The trick for testing the predicter, is to test using the test set that was used in 
 # the training of the model itself. The test set as well as the training deltas
@@ -20,7 +19,6 @@ def test_predicter():
     assert predicter.logger == logger
     assert predicter.pretrained_model == pretrained_gbr_model
     assert predicter.prefit_scaler == prefit_scaler
-
 
 def test_validate_input():
     # set of mocks, which combined should be good for testing validity of inputs across their permutations,
@@ -54,26 +52,26 @@ def test_validate_input():
     }
         
     # should not raise an excception
-    predicter.validate_input(valid_but_out_of_order_input)
+    predicter._validate_input(valid_but_out_of_order_input)
 
     with pytest.raises(ValidationError) as e:
-        predicter.validate_input(invalid_input_1)
+        predicter._validate_input(invalid_input_1)
     assert "predicter-service" in str(e.value)
     
     with pytest.raises(ValidationError) as e:
-        predicter.validate_input(invalid_input_2)
+        predicter._validate_input(invalid_input_2)
     assert "predicter-service" in str(e.value)
     
     with pytest.raises(ValidationError) as e:
-        predicter.validate_input(invalid_input_3)
+        predicter._validate_input(invalid_input_3)
     assert "predicter-service" in str(e.value)
 
 # important to check whether supplied input data can be sorted to match the column order
 # set. This is important, because the ML model is trained on a specific ordering of the 
 # data, yet, Python will let you mess up the ordering. 
 def test_convert_to_ordered_df():
-    # grab the first sample, not including the price column, but preserving the intrinsic order of the columns
-    initial_sample=truncated_and_scaled_df.loc[:, truncated_and_scaled_df.columns != "Price"].iloc[[0]]
+    # grab the first sample, get rid of the price column while preserving the intrinsic order of the columns
+    initial_sample=trainX_renamed_scaled_ordered.iloc[[0]]
     
     # pull only the fields that the "Prediction_Input" type has
     unordered_columns=["Neighborhood", "Bedrooms", "Bathrooms", "SquareFeet"]
@@ -87,8 +85,9 @@ def test_convert_to_ordered_df():
     for key in unordered_columns:
         mock_prediction_input[key]=initial_sample[key].iloc[0] # get the val from the head, since its a one sample df
 
-    ordered_df=predicter.convert_to_ordered_df(mock_prediction_input)
+    ordered_df=predicter._convert_to_ordered_df(mock_prediction_input)
     
+    # go element by element between the two lists representing columns, check if they are the same (they should be)
     assert all(a == b for a, b in zip(ordered_df.columns, pretrained_gbr_model.feature_names_in_))
 
 # comparing the conversion by the method to a conversion made in the 
@@ -103,16 +102,14 @@ def test_convert_neighborhoods():
     
     prev_val=valid_input["Neighborhood"]
     
-    predicter.convert_neighborhoods(valid_input)
+    predicter._convert_neighborhoods(valid_input)
 
     assert valid_input["Neighborhood"] == NEIGHBORHOOD[prev_val]
     
 def test_scaler_transform_input():
-    # take the square feet from the first sample from the base dataset
-    unscaled_val=housing_price_dataset_df["SquareFeet"].iloc[0]
-    
-    # take the square feet frmo the first sample of the truncated and scaled DF
-    already_scaled_val=truncated_and_scaled_df["SquareFeet"].iloc[0]
+    # sample order should be the same
+    unscaled_val=trainX["SquareFeet"].iloc[0]
+    already_scaled_val=trainX_renamed_scaled_ordered["SquareFeet"].iloc[0]
     
     mock_input={
         "Bathrooms": 2,
@@ -123,40 +120,34 @@ def test_scaler_transform_input():
     
     # the other portions of the mock input don't matter that much, we just need an input that 
     # meets "Prediction_Input". Will modify in place.
-    predicter.scaler_transform_input(mock_input)
+    predicter._scaler_transform_input(mock_input)
     
     # the transformed value should be the same as what alerady exists in the truncated and scaled df,
     # since the scaler was fit to the entire original dataset. Using a sample from that original dataset
     # should mean the transformation is deterministic given the dataset.
-    assert already_scaled_val == mock_input["SquareFeet"]
+    assert np.isclose(already_scaled_val, mock_input["SquareFeet"])
     
 def test_predict():
     testX_subset=testX.iloc[0:50]
     testY_subset=testY.iloc[0:50]
     deltasY_subset=deltasY[0:50]
 
-    # because testX is scaled and truncated, need to convert the values back since the predicter expects normal dataset-based vals
-    testX_subset_reverted=testX_subset
-    NEIGHBORHOOD_inverted = {v: k for k, v in NEIGHBORHOOD.items()}
-    testX_subset_reverted["SquareFeet"] = prefit_scaler.inverse_transform(
-        testX_subset_reverted[["SquareFeet"]].values
-    ).flatten()
-    
-    for key in NEIGHBORHOOD_inverted:
-        testX_subset_reverted["Neighborhood"] = testX_subset_reverted["Neighborhood"].replace(int(key), NEIGHBORHOOD_inverted[key])
-        
+    # now, grab each sample, and make a mock input from such sample. The predictor then predicts on these mock inputs
+    # and the predictions are consolidated back to then be compared to deltas already made in Google Collab.
     for i in range(0,50):
-        sample=testX_subset_reverted.iloc[i]
+        sample=testX_subset.iloc[i]
+        
+        print(sample["Neighborhood"])
         
         input={
             "Bathrooms": sample["Bathrooms"],
             "SquareFeet": sample["SquareFeet"],
             "Bedrooms": sample["Bedrooms"],
-            "Neighborhood": sample["Neighborhood"]   
+            "Neighborhood": sample["Neighborhood"]
         }
         
         prediction=predicter.predict(input)
         delta=testY_subset.iloc[i].values[0]-prediction["PricePrediction"]
-        assert delta == deltasY_subset[i]
+        assert np.isclose(delta, deltasY_subset[i])
     
     

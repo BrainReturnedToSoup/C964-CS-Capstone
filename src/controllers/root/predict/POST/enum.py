@@ -1,14 +1,13 @@
 from enum import Enum
-
 class LogKeys(Enum):
-    log_origin="log-origin"
-    route="route"
-    method="method"
-    request="request"
-    exception_raised="exception-raised"
+    LOG_ORIGIN="log-origin"
+    ROUTE="route"
+    METHOD="method"
+    REQUEST="request"
+    EXCEPTION_RAISED="exception-raised"
     
 class LogVals(Enum):
-    [LogKeys.log_origin]="controllers.root.predict.POST"
-    [LogKeys.route]="/predict"
-    [LogKeys.method]="POST"
+    [LogKeys.LOG_ORIGIN]="controllers.root.predict.POST"
+    [LogKeys.ROUTE]="/predict"
+    [LogKeys.METHOD]="POST"
     

@@ -1,7 +1,7 @@
 from marshmallow import Schema, fields, validate
 from abc import ABC
 from abc import ABC, abstractmethod
-from .static import housing_price_dataset_df
+from static.loader import housing_price_dataset_df
 
 BEDROOMS=set(housing_price_dataset_df["Bedrooms"].unique())
 BATHROOMS=set(housing_price_dataset_df["Bathrooms"].unique())
