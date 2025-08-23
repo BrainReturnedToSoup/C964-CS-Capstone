@@ -4,6 +4,7 @@ from custom_logging.log_factory.impl import Log_Factory
 # testing to ensure the log factory can be created, and reused throughout the 
 # application. This test assumes that the individual parts were tested for correctness
 # (things like the state machine of the log factory, the log, and handler itself)
+
 # you can add more tests based on the handler you create, but this will require making a 'slice' of tests all the way up, since these 
 # execute in a specific order to reuse previous tests in their coverage. 
 

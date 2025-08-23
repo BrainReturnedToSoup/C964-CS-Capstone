@@ -4,10 +4,10 @@ from .errors import NotSecureError
 
 # Response constructor is injected so that I can make a mock and test assertion on the response
 class Controller:
-    def __init__(self, logger: Logger_Interface, render_template: render_template, response: Response):
+    def __init__(self, logger: Logger_Interface):
         self.logger=logger
         self.render_template=render_template
-        self.response=response
+        self.response=Response
     
     # the method for the flask route to use
     def handle(self, req: Request) -> Response:

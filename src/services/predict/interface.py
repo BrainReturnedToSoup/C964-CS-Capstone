@@ -1,20 +1,22 @@
-from typing import TypedDict
+from marshmallow import Schema, fields, validate
+from abc import ABC
 from abc import ABC, abstractmethod
+from .static import housing_price_dataset_df
 
-# inputs, REQUIRES MANUAL VALUE CHECKS WITHIN IMPLs
-Square_Feet = [1000, 2999] # min & max
-Bedrooms = set([2,3,4,5])
-Bathrooms = set([1,2,3])
-Neighborhood = {"Rural": 0, "Suburb": 1, "Urban": 2}
-class Prediction_Input(TypedDict):
-    SquareFeet: int
-    Bathrooms: int
-    Bedrooms: int
-    Neighborhood: str
+BEDROOMS=set(housing_price_dataset_df["Bedrooms"].unique())
+BATHROOMS=set(housing_price_dataset_df["Bathrooms"].unique())
+NEIGHBORHOOD={}
 
-# outputs
-class Prediction_Output(TypedDict):
-    Price: float
+unique_neighborhoods=list(housing_price_dataset_df["Neighborhood"].unique())
+for i in range(0, len(unique_neighborhoods)):
+    NEIGHBORHOOD[unique_neighborhoods[i]]=i
+class Prediction_Input(Schema):
+    SquareFeet=fields.Integer(required=True)
+    Bathrooms=fields.Integer(required=True, validate=validate.OneOf(BATHROOMS))
+    Bedrooms=fields.Integer(required=True, validate=validate.OneOf(BEDROOMS))
+    Neighborhood=fields.String(required=True, validate=validate.OneOf(NEIGHBORHOOD.keys()))
+class Prediction_Output():
+    PricePrediction: float
 class Predicter(ABC):
     @abstractmethod
     def predict(input: Prediction_Input) -> Prediction_Output:

@@ -17,7 +17,7 @@
   "license": "BSD-3-Clause",
   "timestamp": 1754310286000,
   "size": 776310,
-  "requested_spec": "None",
+  "requested_spec": "joblib",
   "package_tarball_full_path": "C:\\Users\\minto\\miniconda3\\pkgs\\joblib-1.5.1-py313haa95532_0.conda",
   "extracted_package_dir": "C:\\Users\\minto\\miniconda3\\pkgs\\joblib-1.5.1-py313haa95532_0",
   "files": [
