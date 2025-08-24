@@ -39,7 +39,8 @@ class PredictArgs(Schema):
     @post_load
     def validate_num_of_samples(self, data, many, **kwargs):
         num_of_samples=data["num_of_samples"]
-        if num_of_samples > data["num_of_samples_max"] or num_of_samples < data["num_of_samples_min"]:
+        
+        if num_of_samples > self.num_of_samples_max or num_of_samples < self.num_of_samples_min:
             raise ValidationError("'num_of_samples' must be within the defined min-max range")
 
 class MonteCarlo(ABC):

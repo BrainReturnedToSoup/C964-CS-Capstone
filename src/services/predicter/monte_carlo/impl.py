@@ -21,8 +21,7 @@ class MonteCarlo(MonteCarlo_Interface):
         self.rand_seed=1857295 # just something arbitrary to be used by the random generator for noise generation.
        
         # set the seed and immediately get the base state. From now on, the state will be reused in the given class instance
-        np.random.seed(self.rand_seed) 
-        self.np_random_state=np.random.get_state()
+        self.rng=np.random.default_rng(self.rand_seed)
         
         self.logger=logger
         self.noise_std=noise_std # standard deviation based on raw += square feet. ex: noise_std=50 means +-50 squarefeet as the standard dev.
@@ -46,14 +45,11 @@ class MonteCarlo(MonteCarlo_Interface):
         copy=cp.deepcopy(input)
         current_square_feet = input["SquareFeet"]
         
-        np.random.set_state(self.np_random_state)
         # Generate noise with mean=0, std=self.noise_std
         # This creates values that are symmetrically distributed around 0
-        noise = np.random.normal(0, self.noise_std)
+        noise = self.rng.normal(0, self.noise_std)
         
         copy["SquareFeet"]=max(int(current_square_feet+noise), 0) # needs to be whole ints as per the dataset. max(x, 0) is for the case that the final square feet value is negative (impossible irl)
-        
-        self.np_random_state=np.random.get_state()
         
         return copy
 
