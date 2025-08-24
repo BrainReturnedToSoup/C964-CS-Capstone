@@ -22,15 +22,13 @@ class Predicter(Predicter_Interface):
         input["Neighborhood"] = NEIGHBORHOOD[input["Neighborhood"]]
 
     # will transform the input to be on the scale of what the scaler has fit to the original 
-    # train-and-test dataset. The model was trained on scaled data, which means inputs for production inference must 
-    # match the same scale. 
+    # train-and-test dataset. Only scaled square feet, because the other features are categorical.
     def _scaler_transform_input(self, input: Prediction_Input) -> None:  
         input["SquareFeet"] = self.prefit_scaler.transform([[input["SquareFeet"]]])[0][0]
     
-    # Mainly to order the inputs based on the columns in the dataset. Safety net for if the dataset columns
-    # or even the input data type change in order. 
+    # ensure the order of the received input matches that of the columns expected by the model
     def _convert_to_ordered_df(self, input: Prediction_Input) -> pd.DataFrame:
-        # ensure the order of the received input matches that of the columns
+        
         ordered_vals=[]
         
         for key in self.pretrained_model.feature_names_in_:
@@ -59,5 +57,5 @@ class Predicter(Predicter_Interface):
         prediction=self.pretrained_model.predict(df)
         price=prediction[0]
         
-        return { "PricePrediction": price }
+        return { "price_prediction": price }
     

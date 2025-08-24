@@ -2,7 +2,7 @@ from flask import Request, Response
 import json
 from marshmallow import ValidationError
 from custom_logging.log_factory.interface import Log_Factory as Logger_Interface
-from services.predict.impl import Predicter
+from services.predicter.impl import Predicter
 from .interface import RequestBodySchema
 from .errors import NotSecureError, InvalidContentTypeError
 from .enum import LogKeys, LogVals

@@ -147,7 +147,7 @@ def test_predict():
         }
         
         prediction=predicter.predict(input)
-        delta=testY_subset.iloc[i].values[0]-prediction["PricePrediction"]
+        delta=testY_subset.iloc[i].values[0]-prediction["price_prediction"]
         assert np.isclose(delta, deltasY_subset[i])
     
     
