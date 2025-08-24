@@ -1,8 +1,9 @@
+import copy as cp
 import pandas as pd
 from marshmallow import ValidationError
-from custom_logging.log_factory.interface import Log_Factory as Log_Factory_Interface
+from custom_logging.log_factory.interface import LogFactory as LogFactory_Interface
 from .interface import Predicter as Predicter_Interface
-from .interface import Prediction_Input, Prediction_Output, NEIGHBORHOOD
+from .interface import PredictionInput, PredictionOutput, NEIGHBORHOOD
 from static.loader import pretrained_gbr_model, prefit_scaler
 
 # no point in injecting the model, scaler, etc.
@@ -12,22 +13,26 @@ from static.loader import pretrained_gbr_model, prefit_scaler
 # In the future, look into scikit-learn pipelines, instead of this more manual approach. 
 
 class Predicter(Predicter_Interface):
-    def __init__(self, logger: Log_Factory_Interface):
+    def __init__(self, logger: LogFactory_Interface):
         self.logger=logger
         self.pretrained_model=pretrained_gbr_model
         self.prefit_scaler=prefit_scaler
     
     # convert the string-based labels of neighborhoods to distinct integers
-    def _convert_neighborhoods(self, input: Prediction_Input) -> None :
-        input["Neighborhood"] = NEIGHBORHOOD[input["Neighborhood"]]
+    def _convert_neighborhoods(self, input: PredictionInput) -> PredictionInput :
+        copy=cp.deepcopy(input)
+        copy["Neighborhood"] = NEIGHBORHOOD[input["Neighborhood"]]
+        return copy
 
     # will transform the input to be on the scale of what the scaler has fit to the original 
     # train-and-test dataset. Only scaled square feet, because the other features are categorical.
-    def _scaler_transform_input(self, input: Prediction_Input) -> None:  
-        input["SquareFeet"] = self.prefit_scaler.transform([[input["SquareFeet"]]])[0][0]
+    def _scaler_transform_input(self, input: PredictionInput) -> PredictionInput:  
+        copy=cp.deepcopy(input)
+        copy["SquareFeet"] = self.prefit_scaler.transform([[input["SquareFeet"]]])[0][0]
+        return copy
     
     # ensure the order of the received input matches that of the columns expected by the model
-    def _convert_to_ordered_df(self, input: Prediction_Input) -> pd.DataFrame:
+    def _convert_to_ordered_df(self, input: PredictionInput) -> pd.DataFrame:
         
         ordered_vals=[]
         
@@ -42,18 +47,18 @@ class Predicter(Predicter_Interface):
     # Python's type hints are so weak, that I am validating manually to reduce the amount of tests I have to make
     # to ensure proper behavior. This is especially important, considering potential nightmare bugs due to invalid model input data
     # because someone messed up up the stream (me)
-    def _validate_input(self, input: Prediction_Input) -> None:
+    def _validate_input(self, input: PredictionInput) -> None:
         try:
-            Prediction_Input().load(input)
+            PredictionInput().load(input)
         except ValidationError as e:
             e.messages["origin"]="predicter-service"
             raise e
             
-    def predict(self, input: Prediction_Input) -> Prediction_Output:
+    def predict(self, input: PredictionInput) -> PredictionOutput:
         self._validate_input(input)
-        self._scaler_transform_input(input)
-        self._convert_neighborhoods(input)
-        df=self._convert_to_ordered_df(input)
+        scaled_input=self._scaler_transform_input(input)
+        scaled_converted_input=self._convert_neighborhoods(scaled_input)
+        df=self._convert_to_ordered_df(scaled_converted_input)
         prediction=self.pretrained_model.predict(df)
         price=prediction[0]
         

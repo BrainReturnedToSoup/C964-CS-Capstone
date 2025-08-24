@@ -1,9 +1,9 @@
 import pytest
 from marshmallow import ValidationError
 import numpy as np
-from custom_logging.logger_instance import logger
+from src.custom_logging.instance import logger
 from .impl import Predicter
-from .interface import Prediction_Input, NEIGHBORHOOD
+from .interface import PredictionInput, NEIGHBORHOOD
 from static.loader import pretrained_gbr_model, prefit_scaler, trainX, trainX_renamed_scaled_ordered, testX, testY, deltasY
 
 # The trick for testing the predicter, is to test using the test set that was used in 
@@ -23,28 +23,28 @@ def test_predicter():
 def test_validate_input():
     # set of mocks, which combined should be good for testing validity of inputs across their permutations,
     # as well as the state machine of the predicter (potentially, it's stateful, so checking this is important)
-    valid_but_out_of_order_input:Prediction_Input={
+    valid_but_out_of_order_input:PredictionInput={
         "Bathrooms": 2,
         "SquareFeet": 2187,
         "Bedrooms": 4,
         "Neighborhood": "Rural"    
     }
 
-    invalid_input_1:Prediction_Input={
+    invalid_input_1:PredictionInput={
         "Bathrooms": 0, # the invalid field
         "SquareFeet": 2187,
         "Bedrooms": 4,
         "Neighborhood": "Rural"    
     }
 
-    invalid_input_2:Prediction_Input={
+    invalid_input_2:PredictionInput={
         "Bathrooms": 2,
         "SquareFeet": 2187,
         "Bedrooms": 0, # the invalid field
         "Neighborhood": "Rural"    
     }
 
-    invalid_input_3:Prediction_Input={
+    invalid_input_3:PredictionInput={
         "Bathrooms": 2,
         "SquareFeet": 2187,
         "Bedrooms": 4,
@@ -102,9 +102,9 @@ def test_convert_neighborhoods():
     
     prev_val=valid_input["Neighborhood"]
     
-    predicter._convert_neighborhoods(valid_input)
+    converted_input=predicter._convert_neighborhoods(valid_input)
 
-    assert valid_input["Neighborhood"] == NEIGHBORHOOD[prev_val]
+    assert converted_input["Neighborhood"] == NEIGHBORHOOD[prev_val]
     
 def test_scaler_transform_input():
     # sample order should be the same
@@ -120,12 +120,12 @@ def test_scaler_transform_input():
     
     # the other portions of the mock input don't matter that much, we just need an input that 
     # meets "Prediction_Input". Will modify in place.
-    predicter._scaler_transform_input(mock_input)
+    transformed_input=predicter._scaler_transform_input(mock_input)
     
     # the transformed value should be the same as what alerady exists in the truncated and scaled df,
     # since the scaler was fit to the entire original dataset. Using a sample from that original dataset
     # should mean the transformation is deterministic given the dataset.
-    assert np.isclose(already_scaled_val, mock_input["SquareFeet"])
+    assert np.isclose(already_scaled_val, transformed_input["SquareFeet"])
     
 def test_predict():
     testX_subset=testX.iloc[0:50]

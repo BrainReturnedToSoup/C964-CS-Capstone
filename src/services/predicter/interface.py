@@ -13,7 +13,7 @@ unique_neighborhoods=list(housing_price_dataset_df["Neighborhood"].unique())
 for i in range(0, len(unique_neighborhoods)):
     NEIGHBORHOOD[unique_neighborhoods[i]]=i
 
-class Prediction_Input(Schema):
+class PredictionInput(Schema):
     SquareFeet=fields.Integer(required=True)
     Bathrooms=fields.Integer(required=True, validate=validate.OneOf(BATHROOMS))
     Bedrooms=fields.Integer(required=True, validate=validate.OneOf(BEDROOMS))
@@ -21,10 +21,10 @@ class Prediction_Input(Schema):
 
 # no need for a schema because it's outbound; a return value of the functionality within
 # the given critical path.
-class Prediction_Output(TypedDict):
+class PredictionOutput(TypedDict):
     price_prediction: float
 
 class Predicter(ABC):
     @abstractmethod
-    def predict(input: Prediction_Input) -> Prediction_Output:
+    def predict(self, input: PredictionInput) -> PredictionOutput:
         pass

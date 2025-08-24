@@ -1,9 +1,9 @@
 from custom_logging.handler.impl import handler
-from .impl import Log_Factory
+from .impl import LogFactory
 from custom_logging.log.impl import Log
 
 def test_log_factory():
-    log_factory=Log_Factory(handler)
+    log_factory=LogFactory(handler)
     
     # ensure the handler supplied is the handler saved
     assert log_factory.handler == handler

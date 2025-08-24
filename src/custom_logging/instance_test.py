@@ -1,5 +1,5 @@
 from custom_logging.handler.impl import handler
-from custom_logging.log_factory.impl import Log_Factory
+from custom_logging.log_factory.impl import LogFactory
 
 # testing to ensure the log factory can be created, and reused throughout the 
 # application. This test assumes that the individual parts were tested for correctness
@@ -26,7 +26,7 @@ def test_logger(capsys):
     # check and create the logger factory
     assert capsys.readouterr().out == ""
     
-    logger = Log_Factory(handler=handler)
+    logger = LogFactory(handler=handler)
     
     # create a new log and assert that on commit it reads out to stdout
     log_1 = logger.create_log()
