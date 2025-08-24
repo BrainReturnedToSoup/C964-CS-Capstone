@@ -1,5 +1,6 @@
-from custom_logging.handler.impl import handler
-from custom_logging.log_factory.impl import LogFactory
+import pytest
+from .handler.impl import handler
+from .log_factory.impl import LogFactory
 
 # testing to ensure the log factory can be created, and reused throughout the 
 # application. This test assumes that the individual parts were tested for correctness
@@ -22,6 +23,7 @@ mock_key_atr_set_2 = {
     "8": ("mock")
 }
 
+@pytest.mark.order(4)
 def test_logger(capsys):
     # check and create the logger factory
     assert capsys.readouterr().out == ""

@@ -1,7 +1,9 @@
-from custom_logging.handler.impl import handler
+import pytest
+from ..handler.impl import handler
 from .impl import LogFactory
-from custom_logging.log.impl import Log
+from ..log.impl import Log
 
+@pytest.mark.order(3)
 def test_log_factory():
     log_factory=LogFactory(handler)
     

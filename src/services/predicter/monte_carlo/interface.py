@@ -9,10 +9,10 @@ class MonteCarloOutput(TypedDict):
 class ConstructorArgs(Schema):
     noise_std=fields.Integer(required=True, validate=validate.Range(min=0, max=None))
     num_of_samples_min=fields.Integer(required=True, validate=validate.Range(min=1, max=None))
-    num_of_samples_max=fields.Integer(required=True, validate=validate.Range(min=1, max=None))
+    num_of_samples_max=fields.Integer(required=True)
         
     @post_load
-    def validate_samples_max(self, data):
+    def validate_samples_max(self, data, many, **kwargs):
         if data["num_of_samples_max"] < data["num_of_samples_min"]:
             raise ValidationError("'num_of_samples_max' must be greater than or equal to 'num_of_samples_min'")
        
@@ -37,7 +37,7 @@ class PredictArgs(Schema):
     
     # with the initial schema loaded, do the range check
     @post_load
-    def validate_num_of_samples(self, data):
+    def validate_num_of_samples(self, data, many, **kwargs):
         num_of_samples=data["num_of_samples"]
         if num_of_samples > data["num_of_samples_max"] or num_of_samples < data["num_of_samples_min"]:
             raise ValidationError("'num_of_samples' must be within the defined min-max range")

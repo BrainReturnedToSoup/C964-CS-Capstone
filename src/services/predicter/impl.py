@@ -49,7 +49,7 @@ class Predicter(Predicter_Interface):
     # because someone messed up up the stream (me)
     def _validate_input(self, input: PredictionInput) -> None:
         try:
-            PredictionInput().load(input)
+            PredictionInput().load(data=input)
         except ValidationError as e:
             e.messages["origin"]="predicter-service"
             raise e

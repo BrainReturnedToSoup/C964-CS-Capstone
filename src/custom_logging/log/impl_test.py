@@ -16,6 +16,7 @@ mock_val_3={"mock": "val_3"}
 mock_key_4="mock_key_4"
 mock_val_4=("mock_val_4")
 
+@pytest.mark.order(2)
 def test_log():
     log = Log(handler=handler)
     

@@ -1,5 +1,5 @@
 from .interface import Log as Log_Interface
-from custom_logging.handler.interface import Handler as Handler_Interface
+from ..handler.interface import Handler as Handler_Interface
 
 class Log(Log_Interface):
     def __init__(self, handler: Handler_Interface):

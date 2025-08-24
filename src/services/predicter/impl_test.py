@@ -15,11 +15,14 @@ from static.loader import pretrained_gbr_model, prefit_scaler, trainX, trainX_re
 
 predicter=Predicter(logger=logger) 
 
+
+@pytest.mark.order(5)
 def test_predicter():
     assert predicter.logger == logger
     assert predicter.pretrained_model == pretrained_gbr_model
     assert predicter.prefit_scaler == prefit_scaler
 
+@pytest.mark.order(6)
 def test_validate_input():
     # set of mocks, which combined should be good for testing validity of inputs across their permutations,
     # as well as the state machine of the predicter (potentially, it's stateful, so checking this is important)
@@ -69,6 +72,7 @@ def test_validate_input():
 # important to check whether supplied input data can be sorted to match the column order
 # set. This is important, because the ML model is trained on a specific ordering of the 
 # data, yet, Python will let you mess up the ordering. 
+@pytest.mark.order(7)
 def test_convert_to_ordered_df():
     # grab the first sample, get rid of the price column while preserving the intrinsic order of the columns
     initial_sample=trainX_renamed_scaled_ordered.iloc[[0]]
@@ -92,6 +96,7 @@ def test_convert_to_ordered_df():
 
 # comparing the conversion by the method to a conversion made in the 
 # Google Collab repo the ML model was created in
+@pytest.mark.order(8)
 def test_convert_neighborhoods():
     valid_input={
         "Bathrooms": 2,
@@ -105,7 +110,8 @@ def test_convert_neighborhoods():
     converted_input=predicter._convert_neighborhoods(valid_input)
 
     assert converted_input["Neighborhood"] == NEIGHBORHOOD[prev_val]
-    
+
+@pytest.mark.order(9)
 def test_scaler_transform_input():
     # sample order should be the same
     unscaled_val=trainX["SquareFeet"].iloc[0]
@@ -127,6 +133,7 @@ def test_scaler_transform_input():
     # should mean the transformation is deterministic given the dataset.
     assert np.isclose(already_scaled_val, transformed_input["SquareFeet"])
     
+@pytest.mark.order(10)
 def test_predict():
     testX_subset=testX.iloc[0:50]
     testY_subset=testY.iloc[0:50]

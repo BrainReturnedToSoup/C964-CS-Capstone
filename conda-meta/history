@@ -251,3 +251,13 @@
 # conda version: 25.7.0
 +conda-forge/noarch::pytest-order-1.3.0-pyh29332c3_2
 # update specs: ['pytest-order']
+==> 2025-08-24 12:27:43 <==
+# cmd: C:\Users\minto\miniconda3\Scripts\conda-script.py install -c conda-forge pytest-dependency
+# conda version: 25.7.0
++conda-forge/noarch::pytest-dependency-0.5.1-pyhd8ed1ab_1
+# update specs: ['pytest-dependency']
+==> 2025-08-24 13:48:37 <==
+# cmd: C:\Users\minto\miniconda3\Scripts\conda-script.py uninstall pytest-dependency
+# conda version: 25.7.0
+-conda-forge/noarch::pytest-dependency-0.5.1-pyhd8ed1ab_1
+# remove specs: ['pytest-dependency']
