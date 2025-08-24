@@ -1,0 +1,174 @@
+{
+  "name": "pytest-order",
+  "version": "1.3.0",
+  "build": "pyh29332c3_2",
+  "build_number": 2,
+  "channel": "https://conda.anaconda.org/conda-forge/noarch",
+  "subdir": "noarch",
+  "fn": "pytest-order-1.3.0-pyh29332c3_2.conda",
+  "md5": "e9e7d96ef6e90a50a4a484b305a9b0d9",
+  "url": "https://conda.anaconda.org/conda-forge/noarch/pytest-order-1.3.0-pyh29332c3_2.conda",
+  "sha256": "d30aed1972a363df32ae7fb41b2b622eb40444f0377446ac47b0c3c639173eb4",
+  "depends": [
+    "python >=3.9",
+    "pytest >=5.0",
+    "python"
+  ],
+  "constrains": [],
+  "noarch": "python",
+  "license": "MIT",
+  "package_type": "noarch_python",
+  "timestamp": 1735596789000,
+  "size": 21116,
+  "requested_spec": "pytest-order",
+  "package_tarball_full_path": "C:\\Users\\minto\\miniconda3\\pkgs\\pytest-order-1.3.0-pyh29332c3_2.conda",
+  "extracted_package_dir": "C:\\Users\\minto\\miniconda3\\pkgs\\pytest-order-1.3.0-pyh29332c3_2",
+  "files": [
+    "Lib/site-packages/pytest_order/__init__.py",
+    "Lib/site-packages/pytest_order/item.py",
+    "Lib/site-packages/pytest_order/plugin.py",
+    "Lib/site-packages/pytest_order/settings.py",
+    "Lib/site-packages/pytest_order/sorter.py",
+    "Lib/site-packages/pytest_order-1.3.0.dist-info/INSTALLER",
+    "Lib/site-packages/pytest_order-1.3.0.dist-info/LICENSE",
+    "Lib/site-packages/pytest_order-1.3.0.dist-info/METADATA",
+    "Lib/site-packages/pytest_order-1.3.0.dist-info/RECORD",
+    "Lib/site-packages/pytest_order-1.3.0.dist-info/REQUESTED",
+    "Lib/site-packages/pytest_order-1.3.0.dist-info/WHEEL",
+    "Lib/site-packages/pytest_order-1.3.0.dist-info/direct_url.json",
+    "Lib/site-packages/pytest_order-1.3.0.dist-info/entry_points.txt",
+    "Lib/site-packages/pytest_order-1.3.0.dist-info/top_level.txt",
+    "Lib/site-packages/pytest_order/__pycache__/__init__.cpython-313.pyc",
+    "Lib/site-packages/pytest_order/__pycache__/item.cpython-313.pyc",
+    "Lib/site-packages/pytest_order/__pycache__/plugin.cpython-313.pyc",
+    "Lib/site-packages/pytest_order/__pycache__/settings.cpython-313.pyc",
+    "Lib/site-packages/pytest_order/__pycache__/sorter.cpython-313.pyc"
+  ],
+  "paths_data": {
+    "paths_version": 1,
+    "paths": [
+      {
+        "_path": "site-packages/pytest_order/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "179996d3ba52c86aea0cd636121afe5290f3a41b4df85b185344066567fa3c91",
+        "size_in_bytes": 22,
+        "sha256_in_prefix": "179996d3ba52c86aea0cd636121afe5290f3a41b4df85b185344066567fa3c91"
+      },
+      {
+        "_path": "site-packages/pytest_order/item.py",
+        "path_type": "hardlink",
+        "sha256": "bab7fa415cef9c2dfe87f41a4e1e0707d2fdbab820f8dd3f5cd0fab5633da992",
+        "size_in_bytes": 7818,
+        "sha256_in_prefix": "bab7fa415cef9c2dfe87f41a4e1e0707d2fdbab820f8dd3f5cd0fab5633da992"
+      },
+      {
+        "_path": "site-packages/pytest_order/plugin.py",
+        "path_type": "hardlink",
+        "sha256": "f497907eb2bd2b59727863dcbdea25b423e8ed567941b7d7382df02bf8a2e143",
+        "size_in_bytes": 5640,
+        "sha256_in_prefix": "f497907eb2bd2b59727863dcbdea25b423e8ed567941b7d7382df02bf8a2e143"
+      },
+      {
+        "_path": "site-packages/pytest_order/settings.py",
+        "path_type": "hardlink",
+        "sha256": "865e4104640ea011b54b0d004ba28f7d5e79acf5692f8f0721857e922e46694b",
+        "size_in_bytes": 2559,
+        "sha256_in_prefix": "865e4104640ea011b54b0d004ba28f7d5e79acf5692f8f0721857e922e46694b"
+      },
+      {
+        "_path": "site-packages/pytest_order/sorter.py",
+        "path_type": "hardlink",
+        "sha256": "73d6b3088320a15e9a6024ff329e160dca82ba52577da886d766e0bf7eb30bb3",
+        "size_in_bytes": 21553,
+        "sha256_in_prefix": "73d6b3088320a15e9a6024ff329e160dca82ba52577da886d766e0bf7eb30bb3"
+      },
+      {
+        "_path": "site-packages/pytest_order-1.3.0.dist-info/INSTALLER",
+        "path_type": "hardlink",
+        "sha256": "bc33022edcb7639ff53355b4e91dade50a0bbf0299efeb6171d1ec0ba5029cfc",
+        "size_in_bytes": 6,
+        "sha256_in_prefix": "bc33022edcb7639ff53355b4e91dade50a0bbf0299efeb6171d1ec0ba5029cfc"
+      },
+      {
+        "_path": "site-packages/pytest_order-1.3.0.dist-info/LICENSE",
+        "path_type": "hardlink",
+        "sha256": "15acf55f38f86e6ba43ad7fda0adb8d2b4a4bae29f085b570b391e24869cd396",
+        "size_in_bytes": 1148,
+        "sha256_in_prefix": "15acf55f38f86e6ba43ad7fda0adb8d2b4a4bae29f085b570b391e24869cd396"
+      },
+      {
+        "_path": "site-packages/pytest_order-1.3.0.dist-info/METADATA",
+        "path_type": "hardlink",
+        "sha256": "7e0fe9c7f604810a2da53a5157bab3bb45b0b1308ae70b88d90b8d6b4c753a96",
+        "size_in_bytes": 7656,
+        "sha256_in_prefix": "7e0fe9c7f604810a2da53a5157bab3bb45b0b1308ae70b88d90b8d6b4c753a96"
+      },
+      {
+        "_path": "site-packages/pytest_order-1.3.0.dist-info/RECORD",
+        "path_type": "hardlink",
+        "sha256": "8c3904b20e1547a08d4efebe21137b39a427ceac9e9bae71a6e57ee4f23953ec",
+        "size_in_bytes": 1457,
+        "sha256_in_prefix": "8c3904b20e1547a08d4efebe21137b39a427ceac9e9bae71a6e57ee4f23953ec"
+      },
+      {
+        "_path": "site-packages/pytest_order-1.3.0.dist-info/REQUESTED",
+        "path_type": "hardlink",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_in_bytes": 0,
+        "sha256_in_prefix": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "_path": "site-packages/pytest_order-1.3.0.dist-info/WHEEL",
+        "path_type": "hardlink",
+        "sha256": "3d9504c5d7fbd548bfb28ebb417a724ae1ed0a2dfe277c2f1783912ba93f4bc5",
+        "size_in_bytes": 91,
+        "sha256_in_prefix": "3d9504c5d7fbd548bfb28ebb417a724ae1ed0a2dfe277c2f1783912ba93f4bc5"
+      },
+      {
+        "_path": "site-packages/pytest_order-1.3.0.dist-info/direct_url.json",
+        "path_type": "hardlink",
+        "sha256": "d82a25f1876258c8270426067b8c09269a3a0b83aa65ecc95aa65ec5491884be",
+        "size_in_bytes": 123,
+        "sha256_in_prefix": "d82a25f1876258c8270426067b8c09269a3a0b83aa65ecc95aa65ec5491884be"
+      },
+      {
+        "_path": "site-packages/pytest_order-1.3.0.dist-info/entry_points.txt",
+        "path_type": "hardlink",
+        "sha256": "8ee4ab77485bc6de2cda09d9738a57576e5b50e80cc9d68b02a3f96f1c6236b3",
+        "size_in_bytes": 46,
+        "sha256_in_prefix": "8ee4ab77485bc6de2cda09d9738a57576e5b50e80cc9d68b02a3f96f1c6236b3"
+      },
+      {
+        "_path": "site-packages/pytest_order-1.3.0.dist-info/top_level.txt",
+        "path_type": "hardlink",
+        "sha256": "da51d9fdcdf6418d5d63ce7461f9dc2e33dcba984be8b9de8ab6e8893c3f818f",
+        "size_in_bytes": 13,
+        "sha256_in_prefix": "da51d9fdcdf6418d5d63ce7461f9dc2e33dcba984be8b9de8ab6e8893c3f818f"
+      },
+      {
+        "_path": "Lib/site-packages/pytest_order/__pycache__/__init__.cpython-313.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/pytest_order/__pycache__/item.cpython-313.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/pytest_order/__pycache__/plugin.cpython-313.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/pytest_order/__pycache__/settings.cpython-313.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/pytest_order/__pycache__/sorter.cpython-313.pyc",
+        "path_type": "pyc_file"
+      }
+    ]
+  },
+  "link": {
+    "source": "C:\\Users\\minto\\miniconda3\\pkgs\\pytest-order-1.3.0-pyh29332c3_2",
+    "type": 1
+  }
+}

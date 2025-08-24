@@ -246,3 +246,8 @@
 +defaults/win-64::scipy-1.16.0-py313h242c13b_0
 +defaults/win-64::threadpoolctl-3.5.0-py313h4442805_0
 # update specs: ['scikit-learn=1.6.1']
+==> 2025-08-24 11:56:43 <==
+# cmd: C:\Users\minto\miniconda3\Scripts\conda-script.py install -c conda-forge pytest-order
+# conda version: 25.7.0
++conda-forge/noarch::pytest-order-1.3.0-pyh29332c3_2
+# update specs: ['pytest-order']
