@@ -74,12 +74,12 @@ class MonteCarlo(MonteCarlo_Interface):
         self._validate_input(input=input, num_of_samples=num_of_samples)
         
         # create a bunch of predictions with applied noise. 
-        noisy_prediction_outputs:List[PredictionOutput]=[]
+        noisy_price_predictions:List[PredictionOutput]=[]
         
         for _ in range(num_of_samples):
             noisy_input=self._create_noisy_input(input=input)
-            noisy_prediction_output=self.predicter.predict(input=noisy_input)
-            noisy_prediction_outputs.append(noisy_prediction_output)
+            noisy_price_prediction=self.predicter.predict(input=noisy_input)
+            noisy_price_predictions.append(noisy_price_prediction)
             
-        return { "prediction_outputs": noisy_prediction_outputs }
+        return { "price_predictions": noisy_price_predictions }
         
