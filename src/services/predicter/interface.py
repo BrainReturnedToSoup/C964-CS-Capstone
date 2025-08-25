@@ -1,17 +1,15 @@
 from abc import ABC, abstractmethod
 from typing import TypedDict
 from marshmallow import Schema, fields, validate
-from static.loader import housing_price_dataset_df
 
-# not enums, because enums doesn't allow referencing iteratible value fields
-# and iterating over them.
-BEDROOMS=set(housing_price_dataset_df["Bedrooms"].unique())
-BATHROOMS=set(housing_price_dataset_df["Bathrooms"].unique())
-
-NEIGHBORHOOD={}
-unique_neighborhoods=list(housing_price_dataset_df["Neighborhood"].unique())
-for i in range(0, len(unique_neighborhoods)):
-    NEIGHBORHOOD[unique_neighborhoods[i]]=i
+SQUARE_FEET_RANGE=[1000,2999]
+BEDROOMS=frozenset([2,3,4,5])
+BATHROOMS=frozenset([1,2,3])
+NEIGHBORHOOD={
+    "Rural": int(0),
+    "Suburb": int(1),
+    "Urban": int(2)
+}
 
 class PredictionInput(Schema):
     SquareFeet=fields.Integer(required=True)
@@ -24,6 +22,8 @@ class PredictionInput(Schema):
 class PredictionOutput(TypedDict):
     price_prediction: float
 
+class Preprocessor(ABC):
+    pass
 class Predicter(ABC):
     @abstractmethod
     def predict(self, input: PredictionInput) -> PredictionOutput:

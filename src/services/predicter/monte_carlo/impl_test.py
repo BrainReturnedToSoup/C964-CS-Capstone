@@ -1,9 +1,9 @@
 import pytest
 from marshmallow import ValidationError
 import numpy as np
-from .impl import MonteCarlo
-from ..interface import PredictionInput
-from .interface import MonteCarloOutput
+from services.predicter.monte_carlo.impl import MonteCarlo
+from services.predicter.interface import PredictionInput
+from services.predicter.monte_carlo.interface import MonteCarloOutput
 from custom_logging.instance import logger
 
 @pytest.mark.order(11)

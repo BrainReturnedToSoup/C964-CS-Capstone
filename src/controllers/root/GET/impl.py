@@ -1,10 +1,10 @@
+from http import HTTPStatus
 from flask import Request, Response, render_template
-from custom_logging.log_factory.interface import Log_Factory as Logger_Interface
+from custom_logging.log_factory.interface import LogFactory as LogFactory_Interface
 from .errors import NotSecureError
 
-# Response constructor is injected so that I can make a mock and test assertion on the response
 class Controller:
-    def __init__(self, logger: Logger_Interface):
+    def __init__(self, logger: LogFactory_Interface):
         self.logger=logger
         self.render_template=render_template
         self.response=Response
@@ -35,7 +35,7 @@ class Controller:
                 .commit() 
                 
             if isinstance(e, NotSecureError):
-                return self.response(status=403)
+                return self.response(status=HTTPStatus.FORBIDDEN)
             else:
-                return self.response(status=500)
+                return self.response(status=HTTPStatus.INTERNAL_SERVER_ERROR)
                 

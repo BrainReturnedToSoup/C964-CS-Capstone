@@ -2,9 +2,9 @@ import pytest
 from marshmallow import ValidationError
 import numpy as np
 from src.custom_logging.instance import logger
-from .impl import Predicter
-from .interface import PredictionInput, NEIGHBORHOOD
-from static.loader import pretrained_gbr_model, prefit_scaler, trainX, trainX_renamed_scaled_ordered, testX, testY, deltasY
+from services.predicter.impl import Predicter
+from services.predicter.interface import PredictionInput, NEIGHBORHOOD
+from src.static.model_assets.loader.impl import pretrained_gbr_model, prefit_scaler, trainX, trainX_renamed_scaled_ordered, testX, testY, deltasY
 
 # The trick for testing the predicter, is to test using the test set that was used in 
 # the training of the model itself. The test set as well as the training deltas
@@ -14,7 +14,6 @@ from static.loader import pretrained_gbr_model, prefit_scaler, trainX, trainX_re
 # is the way to ensure correctness.
 
 predicter=Predicter(logger=logger) 
-
 
 @pytest.mark.order(5)
 def test_predicter():

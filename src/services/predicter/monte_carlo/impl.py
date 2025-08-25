@@ -2,10 +2,10 @@ from typing import List
 import copy as cp
 import numpy as np
 from marshmallow import ValidationError
-from ..interface import PredictionInput, PredictionOutput
-from ..interface import Predicter as Predicter_Interface
-from ..instance import predicter
-from .interface import MonteCarlo as MonteCarlo_Interface, MonteCarloOutput, ConstructorArgs, PredictArgs
+from services.predicter.interface import PredictionInput, PredictionOutput
+from services.predicter.interface import Predicter as Predicter_Interface
+from services.predicter.instance import predicter
+from services.predicter.monte_carlo.interface import MonteCarlo as MonteCarlo_Interface, MonteCarloOutput, ConstructorArgs, PredictArgs
 
 
 # no point in injecting the predicter

@@ -2,9 +2,9 @@ import copy as cp
 import pandas as pd
 from marshmallow import ValidationError
 from custom_logging.log_factory.interface import LogFactory as LogFactory_Interface
-from .interface import Predicter as Predicter_Interface
-from .interface import PredictionInput, PredictionOutput, NEIGHBORHOOD
-from static.loader import pretrained_gbr_model, prefit_scaler
+from services.predicter.interface import Predicter as Predicter_Interface
+from services.predicter.interface import PredictionInput, PredictionOutput, NEIGHBORHOOD
+from src.static.model_assets.loader.impl import pretrained_gbr_model, prefit_scaler
 
 # no point in injecting the model, scaler, etc.
 # the methods in the class are way too coupled to the particular ML model for that to matter.
