@@ -7,6 +7,7 @@ class MonteCarloOutput(TypedDict):
     price_predictions: List[PredictionOutput]
 
 class ConstructorArgs(Schema):
+    seed=fields.Integer(required=True, valiadte=validate.Range(min=0, max=None))
     noise_std=fields.Integer(required=True, validate=validate.Range(min=0, max=None))
     num_of_samples_min=fields.Integer(required=True, validate=validate.Range(min=1, max=None))
     num_of_samples_max=fields.Integer(required=True)

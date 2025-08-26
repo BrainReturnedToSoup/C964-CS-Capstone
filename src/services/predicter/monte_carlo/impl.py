@@ -2,10 +2,8 @@ from typing import List
 import copy as cp
 import numpy as np
 from marshmallow import ValidationError
-from services.predicter.interface import PredictionInput, PredictionOutput
-from services.predicter.interface import Predicter as Predicter_Interface
-from services.predicter.instance import predicter
-from services.predicter.monte_carlo.interface import MonteCarlo as MonteCarlo_Interface, MonteCarloOutput, ConstructorArgs, PredictArgs
+from services.predicter.interface import PredictionInput, PredictionOutput, Predicter as Predicter_Interface
+from .interface import MonteCarlo as MonteCarlo_Interface, MonteCarloOutput, ConstructorArgs, PredictArgs
 
 
 # no point in injecting the predicter
@@ -13,26 +11,24 @@ from services.predicter.monte_carlo.interface import MonteCarlo as MonteCarlo_In
 # plus, python doesn't really have any real encapsulation.
 
 class MonteCarlo(MonteCarlo_Interface):
-    def __init__(self, logger, noise_std: int, num_of_samples_min: int=1, num_of_samples_max: int=1000):
-        self._validate_constructor_args(noise_std=noise_std, num_of_samples_min=num_of_samples_min, num_of_samples_max=num_of_samples_max)
-        
-        # a Gradient Boosted Regressor
-        self.predicter:Predicter_Interface=predicter
-        self.rand_seed=1857295 # just something arbitrary to be used by the random generator for noise generation.
-       
-        # set the seed and immediately get the base state. From now on, the state will be reused in the given class instance
-        self.rng=np.random.default_rng(self.rand_seed)
-        
+    def __init__(self, logger, predicter: Predicter_Interface, seed: int=1, noise_std: int=1, num_of_samples_min: int=1, num_of_samples_max: int=1000):
+        self._validate_constructor_args(seed=seed, noise_std=noise_std, num_of_samples_min=num_of_samples_min, num_of_samples_max=num_of_samples_max)
+                
         self.logger=logger
+        self.predicter=predicter
+        self.seed=seed # just something arbitrary to be used by the random generator for noise generation.
         self.noise_std=noise_std # standard deviation based on raw += square feet. ex: noise_std=50 means +-50 squarefeet as the standard dev.
         self.num_of_samples_min=num_of_samples_min
         self.num_of_samples_max=num_of_samples_max
+        
+        # set the seed and immediately get the base state. From now on, the state will be reused in the given class instance
+        self.rng=np.random.default_rng(self.seed)
 
-    def _validate_constructor_args(self, noise_std: int, num_of_samples_min: int, num_of_samples_max: int) -> None:
+    def _validate_constructor_args(self, seed: int, noise_std: int, num_of_samples_min: int, num_of_samples_max: int) -> None:
         constructor_args_schema=ConstructorArgs() # initialize it in-method, since you only really need to use it once on class instantiation
         
         try:
-            constructor_args_schema.load({"noise_std": noise_std, "num_of_samples_min": num_of_samples_min, "num_of_samples_max": num_of_samples_max})
+            constructor_args_schema.load({"seed": seed, "noise_std": noise_std, "num_of_samples_min": num_of_samples_min, "num_of_samples_max": num_of_samples_max})
         except ValidationError as e:
             e.messages["origin"]="monte-carlo-predicter-service"
             raise e

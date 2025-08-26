@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import TypedDict
 from marshmallow import Schema, fields, validate
+import pandas as pd
 
 SQUARE_FEET_RANGE=[1000,2999]
 BEDROOMS=frozenset([2,3,4,5])
@@ -23,7 +24,9 @@ class PredictionOutput(TypedDict):
     price_prediction: float
 
 class Preprocessor(ABC):
-    pass
+    @abstractmethod
+    def process(self, input: PredictionInput) -> pd.DataFrame:
+        pass
 class Predicter(ABC):
     @abstractmethod
     def predict(self, input: PredictionInput) -> PredictionOutput:

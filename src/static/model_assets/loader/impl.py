@@ -12,38 +12,6 @@ from sklearn.preprocessing import StandardScaler
 
 curr_file_path=Path(__file__).resolve().parent.parent
 
-pretrained_gbr_model:GradientBoostingRegressor=joblib.load(curr_file_path / "model.pkl")
-prefit_scaler:StandardScaler=joblib.load(curr_file_path / "scaler.pkl")
-
-housing_price_dataset_df=pd.read_csv(curr_file_path / "housing_price_dataset.csv")
-
-trainX=pd.DataFrame(joblib.load(curr_file_path / "trainX.pkl"))
-trainX_renamed_scaled_ordered=pd.DataFrame(joblib.load(curr_file_path / "trainX_renamed_scaled_ordered.pkl"))
-trainY=pd.DataFrame(joblib.load(curr_file_path / "trainY.pkl"))
-
-testX=pd.DataFrame(joblib.load(curr_file_path / "testX.pkl"))
-testX_renamed_scaled_ordered=pd.DataFrame(joblib.load(curr_file_path / "testX_renamed_scaled_ordered.pkl"))
-testY=pd.DataFrame(joblib.load(curr_file_path / "testY.pkl"))
-
-deltasY=pd.Series(joblib.load(curr_file_path / "deltasY.pkl"), index=testX.index)
-
-trainX=trainX.sort_values(by="SquareFeet", inplace=False)
-trainX_renamed_scaled_ordered=trainX_renamed_scaled_ordered.sort_values(by="SquareFeet", inplace=False)
-trainY=trainY.loc[trainX.index]
-
-testX=testX.sort_values(by="SquareFeet", inplace=False)
-testX_renamed_scaled_ordered=testX_renamed_scaled_ordered.sort_values(by="SquareFeet", inplace=False)
-testY=testY.loc[testX.index]
-
-deltasY=list(deltasY.loc[testX.index])
-
-trainX.reset_index(drop=True, inplace=True)
-trainX_renamed_scaled_ordered.reset_index(drop=True, inplace=True)
-trainY.reset_index(drop=True, inplace=True)
-testX.reset_index(drop=True, inplace=True)
-testX_renamed_scaled_ordered.reset_index(drop=True, inplace=True)
-testY.reset_index(drop=True, inplace=True)
-
 class ModelAssets:
     def __init__(self):
         self.pretrained_gradient_boosted_regressor:GradientBoostingRegressor=joblib.load(curr_file_path / "model.pkl")
