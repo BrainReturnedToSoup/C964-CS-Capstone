@@ -7,7 +7,7 @@ class MonteCarloOutput(TypedDict):
     price_predictions: List[PredictionOutput]
 
 class ConstructorArgs(Schema):
-    seed=fields.Integer(required=True, valiadte=validate.Range(min=0, max=None))
+    seed=fields.Integer(required=True, validate=validate.Range(min=0, max=None))
     noise_std=fields.Integer(required=True, validate=validate.Range(min=0, max=None))
     num_of_samples_min=fields.Integer(required=True, validate=validate.Range(min=1, max=None))
     num_of_samples_max=fields.Integer(required=True)
@@ -24,11 +24,6 @@ class PredictArgs(Schema):
     num_of_samples=fields.Integer(required=True)
     
     def __init__(self, num_of_samples_min: int, num_of_samples_max: int, *args, **kwargs):
-        constructor_args_schema=ConstructorArgs() # reuse the constructor args above for convenience
-        
-        # define "noise_std" on some arbitrary-but-valid value
-        constructor_args_schema.load({"noise_std": 0, "num_of_samples_min": num_of_samples_min, "num_of_samples_max": num_of_samples_max})
-        
         self.num_of_samples_min=num_of_samples_min
         self.num_of_samples_max=num_of_samples_max
         
