@@ -3,9 +3,9 @@ from predict.blueprint import bp
 from .impl import Controller
 from custom_logging.instance import logger
 from services.predicter.instance import predicter
-from .interface import RequestBodySchema
+from .interface import RequestBody
 
-ctlr=Controller(logger=logger, predicter=predicter, response=Response, body_schema=RequestBodySchema()) 
+ctlr=Controller(logger=logger, predicter=predicter, response=Response, body_schema=RequestBody()) 
 
 @bp.route(rule="/", methods=["POST"])
 def controller():

@@ -3,8 +3,11 @@ from abc import ABC, abstractmethod
 from marshmallow import Schema, fields, validate, post_load, ValidationError
 from services.predicter.interface import PredictionInput, PredictionOutput
 
+
 class MonteCarloOutput(TypedDict):
+    # the following output lists should be indexed matched
     price_predictions: List[PredictionOutput]
+    noisy_inputs: List[float] # noisy Square feet values essentially
 
 class ConstructorArgs(Schema):
     seed=fields.Integer(required=True, validate=validate.Range(min=0, max=None))

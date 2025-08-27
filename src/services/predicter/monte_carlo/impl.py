@@ -5,11 +5,6 @@ from marshmallow import ValidationError
 from services.predicter.interface import PredictionInput, PredictionOutput, Predicter as Predicter_Interface
 from .interface import MonteCarlo as MonteCarlo_Interface, MonteCarloOutput, ConstructorArgs, PredictArgs
 
-
-# no point in injecting the predicter
-# the methods in the class are way too coupled to the particular ML model for that to matter.
-# plus, python doesn't really have any real encapsulation.
-
 class MonteCarlo(MonteCarlo_Interface):
     def __init__(self, logger, predicter: Predicter_Interface, seed: int=1, noise_std: int=1, num_of_samples_min: int=1, num_of_samples_max: int=1000):
         self._validate_constructor_args(seed=seed, noise_std=noise_std, num_of_samples_min=num_of_samples_min, num_of_samples_max=num_of_samples_max)
@@ -66,12 +61,14 @@ class MonteCarlo(MonteCarlo_Interface):
         self._validate_input(input=input, num_of_samples=num_of_samples)
         
         # create a bunch of predictions with applied noise. 
+        noisy_inputs=[]
         noisy_price_predictions:List[PredictionOutput]=[]
         
         for _ in range(num_of_samples):
             noisy_input=self._create_noisy_input(input=input)
+            noisy_inputs.append(noisy_input)
             noisy_price_prediction=self.predicter.predict(input=noisy_input)
             noisy_price_predictions.append(noisy_price_prediction)
             
-        return { "price_predictions": noisy_price_predictions }
+        return { "price_predictions": noisy_price_predictions, "noisy_inputs": noisy_inputs}
         

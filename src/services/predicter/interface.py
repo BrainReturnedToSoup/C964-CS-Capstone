@@ -13,7 +13,7 @@ NEIGHBORHOOD={
 }
 
 class PredictionInput(Schema):
-    SquareFeet=fields.Integer(required=True)
+    SquareFeet=fields.Integer(required=True, validate=validate.Range(min=0, max=None))
     Bathrooms=fields.Integer(required=True, validate=validate.OneOf(BATHROOMS))
     Bedrooms=fields.Integer(required=True, validate=validate.OneOf(BEDROOMS))
     Neighborhood=fields.String(required=True, validate=validate.OneOf(NEIGHBORHOOD.keys()))
