@@ -1,4 +1,3 @@
-import json
 from http import HTTPStatus
 
 def test_controller(test_client):
