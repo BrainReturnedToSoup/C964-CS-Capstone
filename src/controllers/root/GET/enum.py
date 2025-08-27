@@ -7,8 +7,8 @@ class LogKeys(Enum):
     REQUEST="request"
     EXCEPTION_RAISED="exception-raised"
     
-class LogVals(Enum):
-    [LogKeys.LOG_ORIGIN]="controllers.root.GET"
-    [LogKeys.ROUTE]="/"
-    [LogKeys.METHOD]="GET"
-    
+LogVals={
+    LogKeys.LOG_ORIGIN: "controllers.root.GET",
+    LogKeys.ROUTE: "/",
+    LogKeys.METHOD: "GET"
+}

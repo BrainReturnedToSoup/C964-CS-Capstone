@@ -1,3 +1,5 @@
+from .controller import controller
+
 def test_controller(test_client):
     response=test_client.get("/")
-    # assert response.content_type == "text/html; charset=utf-8"
+    assert "text/html" in response.content_type

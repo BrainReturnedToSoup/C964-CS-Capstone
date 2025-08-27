@@ -32,7 +32,7 @@ class Controller:
                 .add_attribute(LogKeys.ROUTE, LogVals[LogKeys.ROUTE]) \
                 .add_attribute(LogKeys.METHOD, LogVals[LogKeys.METHOD]) \
                 .add_attribute(LogKeys.REQUEST, str(req)) \
-                .add_attribute("request_body", request_body) \
+                .add_attribute(LogKeys.REQUEST_BODY, request_body) \
                 .commit()
             
             # validate the request body schema, this will throw a ValidationError exception if the body does not match the schema
@@ -57,7 +57,7 @@ class Controller:
                 .add_attribute(LogKeys.ROUTE, LogVals[LogKeys.ROUTE]) \
                 .add_attribute(LogKeys.METHOD, LogVals[LogKeys.METHOD]) \
                 .add_attribute(LogKeys.REQUEST, str(req)) \
-                .add_attribute(LogKeys.EXCEPTION_RAISED, str(e)) \
+                .add_attribute(LogKeys.EXCEPTION_RAISED, f"e={e}") \
                 .commit()
 
             if isinstance(e, NotSecureError):

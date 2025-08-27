@@ -5,6 +5,7 @@ class LogKeys(Enum):
     METHOD="method"
     REQUEST="request"
     EXCEPTION_RAISED="exception-raised"
+    REQUEST_BODY="request-body"
     
 LogVals={
     LogKeys.LOG_ORIGIN: "controllers.root.predict.POST",

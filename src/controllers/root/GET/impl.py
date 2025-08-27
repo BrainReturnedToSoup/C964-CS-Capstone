@@ -5,8 +5,9 @@ from .errors import NotSecureError
 from .enum import LogKeys, LogVals
 
 class Controller:
-    def __init__(self, logger: LogFactory_Interface):
+    def __init__(self, logger: LogFactory_Interface, template_path: str):
         self.logger=logger
+        self.template_path=template_path
     
     # the method for the flask route to use
     def handle(self, req: Request) -> Response:
@@ -22,7 +23,7 @@ class Controller:
                 .add_attribute(LogKeys.REQUEST, str(req)) \
                 .commit() 
             
-            return render_template("index.html")
+            return self.template_path
         except Exception as e:
             self.logger \
                 .create_log() \
@@ -30,7 +31,7 @@ class Controller:
                 .add_attribute(LogKeys.ROUTE, LogVals[LogKeys.ROUTE]) \
                 .add_attribute(LogKeys.METHOD, LogVals[LogKeys.METHOD]) \
                 .add_attribute(LogKeys.REQUEST, str(req)) \
-                .add_attribute("exception-raised", e) \
+                .add_attribute(LogKeys.EXCEPTION_RAISED, f"e={e}") \
                 .commit() 
                 
             if isinstance(e, NotSecureError):
