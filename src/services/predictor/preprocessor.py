@@ -2,9 +2,8 @@ import copy as cp
 import pandas as pd
 from typing import List
 from sklearn.preprocessing import StandardScaler
-from services.predicter.interface import Preprocessor as Preprocessor_Interface
 from custom_logging.log_factory.interface import LogFactory as LogFactory_Interface
-from services.predicter.interface import PredictionInput, NEIGHBORHOOD
+from services.predictor.interface import PredictionInput, NEIGHBORHOOD, Preprocessor as Preprocessor_Interface
 
 class Preprocessor(Preprocessor_Interface):
     def __init__(self, logger: LogFactory_Interface, prefit_scaler: StandardScaler, columns: List[str]):

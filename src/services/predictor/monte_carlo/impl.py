@@ -2,15 +2,15 @@ from typing import List
 import copy as cp
 import numpy as np
 from marshmallow import ValidationError
-from services.predicter.interface import PredictionInput, PredictionOutput, Predicter as Predicter_Interface
+from ..interface import PredictionInput, PredictionOutput, Predictor as Predictor_Interface
 from .interface import MonteCarlo as MonteCarlo_Interface, MonteCarloOutput, ConstructorArgs, PredictArgs
 
 class MonteCarlo(MonteCarlo_Interface):
-    def __init__(self, logger, predicter: Predicter_Interface, seed: int=1, noise_std: int=1, num_of_samples_min: int=1, num_of_samples_max: int=1000):
+    def __init__(self, logger, predictor: Predictor_Interface, seed: int=1, noise_std: int=1, num_of_samples_min: int=1, num_of_samples_max: int=1000):
         self._validate_constructor_args(seed=seed, noise_std=noise_std, num_of_samples_min=num_of_samples_min, num_of_samples_max=num_of_samples_max)
                 
         self.logger=logger
-        self.predicter=predicter
+        self.predictor=predictor
         self.seed=seed # just something arbitrary to be used by the random generator for noise generation.
         self.noise_std=noise_std # standard deviation based on raw += square feet. ex: noise_std=50 means +-50 squarefeet as the standard dev.
         self.num_of_samples_min=num_of_samples_min
@@ -67,7 +67,7 @@ class MonteCarlo(MonteCarlo_Interface):
         for _ in range(num_of_samples):
             noisy_input=self._create_noisy_input(input=input)
             noisy_inputs.append(noisy_input)
-            noisy_price_prediction=self.predicter.predict(input=noisy_input)
+            noisy_price_prediction=self.predictor.predict(input=noisy_input)
             noisy_price_predictions.append(noisy_price_prediction)
             
         return { "price_predictions": noisy_price_predictions, "noisy_inputs": noisy_inputs}

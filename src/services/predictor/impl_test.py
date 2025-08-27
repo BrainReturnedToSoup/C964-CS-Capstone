@@ -1,7 +1,7 @@
 import numpy as np
-from .static import model_assets
 from custom_logging.instance import logger
-from .impl import Predicter
+from .static import model_assets
+from .impl import Predictor
 from .preprocessor import Preprocessor
 
 def test_validate_input():
@@ -9,7 +9,7 @@ def test_validate_input():
 
 def test_predict():
     preprocessor=Preprocessor(logger=logger, prefit_scaler=model_assets.prefit_scaler, columns=model_assets.pretrained_gradient_boosted_regressor.feature_names_in_)
-    predicter=Predicter(logger=logger, pretrained_model=model_assets.pretrained_gradient_boosted_regressor, preprocessor=preprocessor)
+    predicter=Predictor(logger=logger, pretrained_model=model_assets.pretrained_gradient_boosted_regressor, preprocessor=preprocessor)
     
     testX_subset=model_assets.testX_raw_df.iloc[0:50]
     testY_subset=model_assets.testY_df.iloc[0:50]

@@ -1,7 +1,7 @@
 from typing import List, TypedDict
 from abc import ABC, abstractmethod
 from marshmallow import Schema, fields, validate, post_load, ValidationError
-from services.predicter.interface import PredictionInput, PredictionOutput
+from ..interface import PredictionInput, PredictionOutput
 
 
 class MonteCarloOutput(TypedDict):

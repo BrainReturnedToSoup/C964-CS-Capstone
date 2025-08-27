@@ -1,7 +1,7 @@
 from marshmallow import ValidationError
 from sklearn.ensemble import GradientBoostingRegressor
 from custom_logging.log_factory.interface import LogFactory as LogFactory_Interface
-from .interface import  PredictionInput, PredictionOutput, Predicter as Predicter_Interface, Preprocessor as Preprocessor_Interface
+from .interface import  PredictionInput, PredictionOutput, Predictor as Predictor_Interface, Preprocessor as Preprocessor_Interface
 
 # no point in injecting the model, scaler, etc.
 # the methods in the class are way too coupled to the particular ML model for that to matter.
@@ -9,7 +9,7 @@ from .interface import  PredictionInput, PredictionOutput, Predicter as Predicte
 
 # In the future, look into scikit-learn pipelines, instead of this more manual approach. 
 
-class Predicter(Predicter_Interface):
+class Predictor(Predictor_Interface):
     def __init__(self, logger: LogFactory_Interface, pretrained_model: GradientBoostingRegressor, preprocessor: Preprocessor_Interface):
         self.logger=logger
         self.pretrained_model=pretrained_model
@@ -23,7 +23,7 @@ class Predicter(Predicter_Interface):
         try:
             PredictionInput().load(data=input)
         except ValidationError as e:
-            e.messages["origin"]="predicter-service"
+            e.messages["origin"]="predictor-service"
             raise e
             
     def predict(self, input: PredictionInput) -> PredictionOutput:

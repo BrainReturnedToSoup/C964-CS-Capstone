@@ -1,19 +1,18 @@
-import json
 from http import HTTPStatus
 from unittest.mock import Mock
 from .impl import Controller
-from services.predicter.monte_carlo.instance import monte_carlo_predicter
+from services.predictor.monte_carlo.instance import monte_carlo_predictor
 from custom_logging.instance import logger
 
 def test_handle():
-    controller=Controller(logger=logger, monte_carlo_predicter=monte_carlo_predicter)  
+    controller=Controller(logger=logger, monte_carlo_predictor=monte_carlo_predictor, num_of_samples=100)  
     
-    valid_body=json.dumps({
+    valid_body={
         "SquareFeet": 1876,
         "Bathrooms": 2,
         "Bedrooms": 2,
         "Neighborhood": "Urban"
-    })
+    }
     
     valid_req=Mock()
     valid_req.is_secure=True
@@ -24,8 +23,8 @@ def test_handle():
     
     assert response.status_code == int(HTTPStatus.OK)
     assert response.content_type == "application/json"
-    assert "price_predictions" in json.dumps(response.get_json())
-    assert "noisy_inputs" in json.dumps(response.get_json())
+    assert "price_predictions" in response.get_json()
+    assert "noisy_inputs" in response.get_json()
     
     invalid_req_1=Mock()
     invalid_req_1.is_secure=False # invalid
@@ -44,33 +43,33 @@ def test_handle():
     
     assert response.status_code == int(HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
     
-    invalid_body_1=json.dumps({
+    invalid_body_1={
         "SquareFeet": 0, # invalid
         "Bathrooms": 2,
         "Bedrooms": 2,
         "Neighborhood": "Urban"
-    })
+    }
     
-    invalid_body_2=json.dumps({
+    invalid_body_2={
         "SquareFeet": 1876, 
         "Bathrooms": 4, # invalid
         "Bedrooms": 2,
         "Neighborhood": "Urban"
-    })
+    }
     
-    invalid_body_3=json.dumps({
+    invalid_body_3={
         "SquareFeet": 1876,
         "Bathrooms": 2,
         "Bedrooms": 0, # invalid
         "Neighborhood": "Urban"
-    })
+    }
     
-    invalid_body_4=json.dumps({
+    invalid_body_4={
         "SquareFeet": 1876,
         "Bathrooms": 2,
         "Bedrooms": 2,
         "Neighborhood": "invalid" # invalid
-    })
+    }
     
     invalid_req_3=Mock()
     invalid_req_3.is_secure=True

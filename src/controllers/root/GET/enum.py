@@ -8,7 +8,7 @@ class LogKeys(Enum):
     EXCEPTION_RAISED="exception-raised"
     
 LogVals={
-    LogKeys.LOG_ORIGIN: "controllers.root.GET",
-    LogKeys.ROUTE: "/",
-    LogKeys.METHOD: "GET"
+    LogKeys.LOG_ORIGIN.value: "controllers.root.GET",
+    LogKeys.ROUTE.value: "/",
+    LogKeys.METHOD.value: "GET"
 }

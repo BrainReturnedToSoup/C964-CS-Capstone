@@ -8,7 +8,7 @@ class LogKeys(Enum):
     REQUEST_BODY="request-body"
     
 LogVals={
-    LogKeys.LOG_ORIGIN: "controllers.root.predict.POST",
-    LogKeys.ROUTE: "/predict",
-    LogKeys.METHOD: "POST"
+    LogKeys.LOG_ORIGIN.value: "controllers.root.predict.POST",
+    LogKeys.ROUTE.value: "/predict",
+    LogKeys.METHOD.value: "POST"
 }

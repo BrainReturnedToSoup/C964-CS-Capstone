@@ -1,6 +1,6 @@
 import numpy as np
-from services.predicter.interface import BEDROOMS, BATHROOMS, NEIGHBORHOOD, SQUARE_FEET_RANGE
-from services.predicter.static import model_assets
+from .interface import BEDROOMS, BATHROOMS, NEIGHBORHOOD, SQUARE_FEET_RANGE
+from .static import model_assets
 
 def test_expected_columns():
     expected_columns_x=frozenset(["SquareFeet", "Bedrooms", "Bathrooms", "Neighborhood"])
