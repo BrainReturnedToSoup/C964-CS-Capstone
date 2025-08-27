@@ -7,7 +7,7 @@ from .impl import Controller
 path=Path(__file__).resolve().parent.parent.parent
 
 def test_handle():
-    controller=Controller(logger=logger, template_path=path / "templates" / "index_test.html")
+    controller=Controller(logger=logger, template=path / "templates" / "index_test.html")
     
     valid_req=Mock()
     valid_req.is_secure=True

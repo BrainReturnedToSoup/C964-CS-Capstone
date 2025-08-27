@@ -1,9 +1,9 @@
-from flask import Flask
+from .app import create_app
 import pytest
 
 @pytest.fixture
 def test_client():
-    app=Flask(__name__)
-    app.config.update({"TESTING": True})
-    
-    return app.test_client()
+    app = create_app()
+    print("App in fixture:", id(app))
+    with app.test_client() as client:
+        yield client
