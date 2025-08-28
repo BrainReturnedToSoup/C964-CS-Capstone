@@ -23,24 +23,31 @@ function InputField({
           defaultValue={defaultVal}
           id={id}
           name={name}
-          type="email"
-          placeholder="you@example.com"
+          type="text"
+          placeholder={defaultVal}
           aria-invalid={!isValid}
           aria-describedby="email-error"
-          className="col-start-1 row-start-1 block w-full rounded-md bg-white py-1.5 pl-3 pr-10 text-red-900 outline outline-1 -outline-offset-1 outline-red-300 placeholder:text-red-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-red-600 sm:pr-9 sm:text-sm/6 dark:bg-white/5 dark:text-red-400 dark:outline-red-500/50 dark:placeholder:text-red-400/70 dark:focus:outline-red-400"
+          className={`col-start-1 row-start-1 block w-full rounded-md bg-white py-1.5 pl-3 pr-10 ${
+            !isValid
+              ? "text-red-900 outline-red-400 placeholder:text-red-300  focus-visible:outline-2 focus-visible:-outline-offset-2"
+              : "text-gray-900 outline-gray-300 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-indigo-600"
+          } outline-1 -outline-offset-1 focus:outline-[1.5px]  `}
           onChange={onChange}
         />
-        <ExclamationCircleIcon
-          aria-hidden="true"
-          className="pointer-events-none col-start-1 row-start-1 mr-3 size-5 self-center justify-self-end text-red-500 sm:size-4 dark:text-red-400"
-        />
+
+        {!isValid && (
+          <ExclamationCircleIcon
+            aria-hidden="true"
+            className="pointer-events-none col-start-1 row-start-1 mr-3 size-5 self-center justify-self-end text-red-500 sm:size-4 dark:text-red-400"
+          />
+        )}
       </div>
-      {isValid && (
+      {!isValid && (
         <p
           id={`${id}-error`}
           className="mt-2 text-sm text-red-600 dark:text-red-400"
         >
-            {constrainErrorMessage}
+          {constrainErrorMessage}
         </p>
       )}
     </div>

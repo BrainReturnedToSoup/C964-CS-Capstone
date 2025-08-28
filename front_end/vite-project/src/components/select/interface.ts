@@ -3,5 +3,5 @@ export interface SelectMenu_Interface {
     label: string;
     name: string;
     options: string[];
-    onChange: (e: React.SyntheticEvent) => void
+    onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }

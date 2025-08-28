@@ -5,5 +5,5 @@ export interface Input_Interface {
   defaultVal: string;
   isValid: boolean;
   constrainErrorMessage: string;
-  onChange: (e: React.SyntheticEvent) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
