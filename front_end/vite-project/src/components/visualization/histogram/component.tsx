@@ -1,76 +1,84 @@
-import d3 from "d3";
+import * as d3 from "d3";
 import type { Histogram_Interface } from "./interface";
 import { useEffect, useRef } from "react";
 
 function Histogram({
   width,
   height,
-  margin,
   xAxisLabel,
   yAxisLabel,
-  binWidth,
+  binInterval,
   data,
   style,
 }: Histogram_Interface) {
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const divRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!divRef.current) return;
+    if (!data || data.length === 0) return;
 
-    // clear any previous SVG thats there
-    d3.select(containerRef.current).selectAll("*").remove();
+    d3.select(divRef.current).selectAll("*").remove();
 
-    // Compute min, max, and bin thresholds
-    const min = d3.min(data) as number;
-    const max = d3.max(data) as number;
-    const binThresholds = d3.range(min - binWidth, max + binWidth, binWidth);
-
-    const bins = d3.bin().domain([min, max]).thresholds(binThresholds)(data);
-
-    // Inner chart dimensions
+    const margin = { top: 40, left: 40, bottom: 40, right: 40 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
-    // Scales
-    const x = d3
+    const [min, max] = d3.extent(data) as [number, number]; // min and max within the supplied data array
+    const minBin = binInterval * Math.floor(min / binInterval); // finds the very left value representing bin
+    const maxBin = binInterval * Math.ceil(max / binInterval) + binInterval; // finds the rightmost left value + an additional bin
+
+    const binThresholds = d3.range(minBin, maxBin + binInterval, binInterval);
+
+    const bins = d3
+      .bin()
+      .domain([minBin, maxBin + binInterval])
+      .thresholds(binThresholds)(data);
+
+    const xScale = d3
       .scaleLinear()
-      .domain([min - binWidth, max + binWidth])
+      .domain([
+        minBin - (maxBin - minBin) * 0.03,
+        maxBin + (maxBin - minBin) * 0.03,
+      ])
       .range([0, innerWidth]);
 
-    const yMax = d3.max(bins, (d) => d.length)!; // from the bins, find the bin with the max height, and use that as the yMax
-    const y = d3
+    const yMax = d3.max(bins, (d) => d.length)!;
+    const yScale = d3
       .scaleLinear()
-      .domain([0, yMax * 1.15]) // 15% buffer space to the top
+      .domain([0, yMax * 1.1])
       .range([innerHeight, 0]);
 
-    // Create SVG
     const svg = d3
       .create("svg")
       .attr("width", width)
       .attr("height", height)
       .attr("viewBox", [0, 0, width, height])
-      .attr("style", style);
+      .attr("style", String(style));
 
-    // Group for margins
-    const g = svg
+    // Create a group for the chart area with margin translation
+    const chartGroup = svg
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // Draw bars
-    g.append("g")
+    // Draw bars within the chart group (already margin-adjusted)
+    chartGroup
+      .append("g")
       .attr("fill", "steelblue")
       .selectAll("rect")
       .data(bins)
       .join("rect")
-      .attr("x", (d) => x(d.x0!))
-      .attr("width", (d) => Math.max(0, x(d.x1!) - x(d.x0!) - 1)) // 1px gap
-      .attr("y", (d) => y(d.length))
-      .attr("height", (d) => innerHeight - y(d.length));
+      .attr("x", (d) => xScale(d.x0 as number) + 1)
+      .attr("width", (d) =>
+        Math.max(0, xScale(d.x1 as number) - xScale(d.x0 as number) - 1)
+      )
+      .attr("y", (d) => yScale(d.length))
+      .attr("height", (d) => innerHeight - yScale(d.length));
 
-    // X-axis
-    g.append("g")
+    // X-axis - position at bottom of chart area
+    chartGroup
+      .append("g")
       .attr("transform", `translate(0,${innerHeight})`)
-      .call(d3.axisBottom(x).ticks(innerWidth / 50))
+      .call(d3.axisBottom(xScale).tickValues(binThresholds))
       .call((g) =>
         g
           .append("text")
@@ -78,12 +86,20 @@ function Histogram({
           .attr("y", margin.bottom - 4)
           .attr("fill", "currentColor")
           .attr("text-anchor", "end")
+          .attr("font-weight", "bold")
+          .attr("font-size", "0.85rem")
           .text(xAxisLabel)
       );
 
-    // Y-axis
-    g.append("g")
-      .call(d3.axisLeft(y).ticks(innerHeight / 20))
+    // Y-axis - position at left of chart area
+    chartGroup
+      .append("g")
+      .call(
+        d3
+          .axisLeft(yScale)
+          .ticks(yMax) // Try to have up to yMax ticks
+          .tickFormat(d3.format("d")) // Format as integers
+      )
       .call((g) => g.select(".domain").remove())
       .call((g) =>
         g
@@ -92,19 +108,15 @@ function Histogram({
           .attr("y", 10)
           .attr("fill", "currentColor")
           .attr("text-anchor", "start")
+          .attr("font-weight", "bold")
+          .attr("font-size", "0.85rem")
           .text(yAxisLabel)
       );
 
-    const containerRefInstance = containerRef.current;
+    divRef.current.appendChild(svg.node()!);
+  }, [width, height, xAxisLabel, yAxisLabel, binInterval, data, style]);
 
-    containerRefInstance.appendChild(svg.node()!);
-  }, [margin, width, height, xAxisLabel, yAxisLabel, binWidth, data, style]);
-
-  return (
-    <>
-      <div ref={containerRef}></div>
-    </>
-  );
+  return <div ref={divRef} />;
 }
 
 export { Histogram };

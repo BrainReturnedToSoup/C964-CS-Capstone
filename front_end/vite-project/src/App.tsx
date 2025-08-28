@@ -1,10 +1,9 @@
-import './App.css'
+import { Histogram } from "./components/visualization/histogram/component";
+
+import "./App.css";
 
 function App() {
-
-  return (
-    <></>
-  )
+  return <></>;
 }
 
-export default App
+export default App;
