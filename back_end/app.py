@@ -15,4 +15,4 @@ def create_app():
     return app
 
 if __name__ == "__main__":
-    create_app().run(ssl_context="adhoc")
+    create_app().run(host="0.0.0.0", ssl_context="adhoc")
