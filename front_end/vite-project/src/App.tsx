@@ -34,14 +34,15 @@ function App() {
   return (
     <div className="flex flex-col items-center">
       <div className="w-[450px] mt-[128px] mb-[64px] col-start-1 row-start-1 appearance-none rounded-md bg-white py-1.5 px-3 text-gray-900 outline-1 -outline-offset-1 outline-gray-300">
-        <h1 className="text-center align-middle text-[1.25rem] font-bold text-gray-900 mt-4">
+        <h1 className="text-center align-middle text-[1.25rem] font-bold text-gray-900 my-4">
           Housing Price Predictor
         </h1>
         <div>
           {error && (
-            <div>
-              <p>{error}</p>
+            <div className="bg-red-200">
+              <p className="text-red-500 mb-10 p-2 text-sm">{error}</p>
               <button
+                className="hover:cursor-pointer bg-white h-[24px] w-full py-4  flex justify-center items-center border-b-[1px] border-x-[1px] border-gray-300"
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
