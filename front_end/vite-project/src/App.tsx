@@ -20,7 +20,7 @@ function App() {
 
   // square feet input field constraint validation
   const [isEmpty, setIsEmpty] = useState<boolean>(true); // so that constraint validation doesn't flag in an empty field, while at the same time disabling the submit button
-  const [isValid, setIsValid] = useState<boolean>(false);
+  const [isValid, setIsValid] = useState<boolean>(true); // starts out valid because of the default values
 
   const predictionRequestRef = useRef<Promise<void> | null>(null); // used to prevent rapid click race condition; sidesteps any split hairs of the react rendering lifecycle
   const [predictionIsPending, setPredictionIsPending] =
@@ -151,6 +151,9 @@ function App() {
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
+                console.log(
+                  `Prediction attempted. Field values:squareFeet=${squareFeet}:numOfBedrooms=${numOfBedrooms}:numOfBathrooms=${numOfBathrooms}:neighborhoodType=${neighborhoodType}`
+                );
 
                 if (predictionRequestRef.current === null) {
                   predictionRequestRef.current = fetch("/predict", {
