@@ -4,24 +4,32 @@ import { SelectMenu } from "./components/select/component";
 import { InputField } from "./components/input/component";
 import { Histogram } from "./components/visualization/histogram/component";
 
+import type { Prediction, PredictionInputs } from "./Interface";
+
 import "./App.css";
 
 function App() {
   const [error, setError] = useState<string | null>(null);
 
+  // represent the actual state of the input fields. These are separate to prevent memory thrashing
+  // due to constant changing properties. for instance, 'square feet' is typed, and each change would invoke the state setter.
   const [squareFeet, setSquareFeet] = useState<number | null>(null);
   const [numOfBedrooms, setNumOfBedrooms] = useState<number | null>(null);
   const [numOfBathrooms, setNumOfBathrooms] = useState<number | null>(null);
   const [neighborhoodType, setNeighborhoodType] = useState<string | null>(null);
 
-  // square feet input field
-  const [isEmpty, setIsEmpty] = useState<boolean>(true);
+  // square feet input field constraint validation
+  const [isEmpty, setIsEmpty] = useState<boolean>(true); // so that constraint validation doesn't flag in an empty field, while at the same time disabling the submit button
   const [isValid, setIsValid] = useState<boolean>(false);
 
   const predictionRequestRef = useRef<Promise<void> | null>(null); // used to prevent rapid click race condition; sidesteps any split hairs of the react rendering lifecycle
   const [predictionIsPending, setPredictionIsPending] =
     useState<boolean>(false); // used as part of disabling the submit button
-  const [prediction, setPrediction] = useState<any | null>(null); // the actual prediction data as fetched on submission
+  const [prediction, setPrediction] = useState<Prediction | null>(null); // the actual prediction data as fetched on submission
+
+  // the values supplied as part of the prediction above. This holistic rather than separate, because this value is not directly
+  // invoked or changed by, say, the user actively typing in the input fields.
+  const [predInputs, setPredInputs] = useState<PredictionInputs | null>(null);
 
   return (
     <div className="flex flex-col items-center">
@@ -138,7 +146,7 @@ function App() {
 
           <div className="my-4 flex justify-center items-center">
             <button
-              disabled={isEmpty || !isValid || predictionIsPending}
+              disabled={!isValid || predictionIsPending}
               className="hover:cursor-pointer col-start-1 row-start-1 text-xl w-fit align-middle text-center appearance-none rounded-md bg-white active:bg-gray-100 py-1.5 px-3  text-gray-900 outline-1 -outline-offset-1 outline-gray-300"
               type="button"
               onClick={(e) => {
@@ -156,9 +164,17 @@ function App() {
                   })
                     .then((res) => res.json())
                     .then((data) => {
-                      setPrediction(data);
+                      setPrediction(data as Prediction);
+                      setPredInputs({
+                        squareFeet: squareFeet!,
+                        numOfBedrooms: numOfBedrooms!,
+                        numOfBathrooms: numOfBathrooms!,
+                        neighborhoodType: neighborhoodType!,
+                      });
                     })
                     .catch((e: Error) => {
+                      setPrediction(null);
+                      setPredInputs(null);
                       setError(e.message);
                     })
                     .finally(() => {
@@ -176,28 +192,61 @@ function App() {
         </div>
       </div>
 
-      <div className="mb-8">
-        {/* {prediction && ( */}
-        <>
-          <Histogram
-            width={700}
-            height={450}
-            xAxisLabel="Price Range Buckets"
-            yAxisLabel="Number of Occurences"
-            binInterval={1}
-            data={[1, 1, 1, 4, 5, 5, 5, 7, 7, 8]}
-            style={"" as React.CSSProperties}
-          />
-          <Histogram
-            width={700}
-            height={450}
-            xAxisLabel="Price Range Buckets"
-            yAxisLabel="Number of Occurences"
-            binInterval={1}
-            data={[1, 1, 1, 4, 5, 5, 5, 7, 7, 8]}
-            style={"" as React.CSSProperties}
-          />
-        </>
+      <div className="mb-8 flex flex-col items-center justify-center w-[450px] mt-[128px] mb-[64px">
+        {prediction && predInputs && (
+          <>
+            <div className="mb-8">
+              <h1 className="text-center align-middle text-2xl">Inputs</h1>
+              <ul>
+                <li>SquareFeet: {predInputs.squareFeet} +-50 Gaussian Noise</li>
+                <li>Number of Bedrooms: {predInputs.numOfBedrooms}</li>
+                <li>Number of Bathrooms: {predInputs.numOfBathrooms}</li>
+                <li>Neighborhood Type: {predInputs.neighborhoodType}</li>
+              </ul>
+            </div>
+            <div className="mb-8">
+              <h1 className="text-center align-middle text-2xl">
+                Prediction Spread
+              </h1>
+              <Histogram
+                width={700}
+                height={450}
+                xAxisLabel="Price Ranges"
+                yAxisLabel="Number of Occurences"
+                binInterval={1}
+                data={prediction.price_predictions}
+                style={"" as React.CSSProperties}
+              />
+            </div>
+            <div>
+              <h1 className="text-center align-middle mb-4 text-2xl">
+                Square Feet Uncertainty Range Used
+              </h1>
+              <p className="text-sm">
+                The prediction uses gradient boosted regression. This method is
+                robust, but unfortunately deterministic, as opposed to the
+                stochastic nature related to this task. To produce a more
+                reliabe prediction, Gaussian noise is applied to the features
+                representing continuous data (in this case, square footage) to
+                yield a spread of predictions rather than a single prediction.
+                This also means submitting the same combination of inputs may
+                not yield the same output.
+              </p>
+              <Histogram
+                width={700}
+                height={450}
+                xAxisLabel="Square Feet Ranges"
+                yAxisLabel="Number of Occurences"
+                binInterval={1}
+                data={
+                  // [1, 1, 1, 2, 2, 3, 3, 3, 3, 3, 4, 5, 7, 8, 8]
+                  prediction.gaussian_noisy_square_feet
+                }
+                style={"" as React.CSSProperties}
+              />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
