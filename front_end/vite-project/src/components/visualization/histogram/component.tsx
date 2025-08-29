@@ -7,6 +7,8 @@ function Histogram({
   height,
   xAxisLabel,
   yAxisLabel,
+  yNumOfTicks,
+  xTickLabelInterval,
   binInterval,
   data,
   style,
@@ -19,7 +21,7 @@ function Histogram({
 
     d3.select(divRef.current).selectAll("*").remove();
 
-    const margin = { top: 40, left: 40, bottom: 40, right: 40 };
+    const margin = { top: 80, left: 40, bottom: 40, right: 40 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -43,10 +45,7 @@ function Histogram({
       .range([0, innerWidth]);
 
     const yMax = d3.max(bins, (d) => d.length)!;
-    const yScale = d3
-      .scaleLinear()
-      .domain([0, yMax * 1.1])
-      .range([innerHeight, 0]);
+    const yScale = d3.scaleLinear().domain([0, yMax]).range([innerHeight, 0]);
 
     const svg = d3
       .create("svg")
@@ -78,7 +77,11 @@ function Histogram({
     chartGroup
       .append("g")
       .attr("transform", `translate(0,${innerHeight})`)
-      .call(d3.axisBottom(xScale).tickValues(binThresholds))
+      .call(
+        d3.axisBottom(xScale).tickValues(
+          binThresholds.filter((_, i) => i % xTickLabelInterval === 0) // Show every 2nd tick
+        )
+      )
       .call((g) =>
         g
           .append("text")
@@ -88,6 +91,7 @@ function Histogram({
           .attr("text-anchor", "end")
           .attr("font-weight", "bold")
           .attr("font-size", "0.85rem")
+          .attr("transform", "rotate(70)") // Rotate for vertical orientation
           .text(xAxisLabel)
       );
 
@@ -95,26 +99,33 @@ function Histogram({
     chartGroup
       .append("g")
       .call(
-        d3
-          .axisLeft(yScale)
-          .ticks(yMax) // Try to have up to yMax ticks
-          .tickFormat(d3.format("d")) // Format as integers
+        d3.axisLeft(yScale).ticks(yNumOfTicks).tickFormat(d3.format("d")) // Format as integers
       )
       .call((g) => g.select(".domain").remove())
       .call((g) =>
         g
           .append("text")
-          .attr("x", -margin.left)
-          .attr("y", 10)
+          .attr("x", 40) // Center in the left margin area
+          .attr("y", -20) // Position above the top of the chart
           .attr("fill", "currentColor")
-          .attr("text-anchor", "start")
+          .attr("text-anchor", "middle") // Center the text
           .attr("font-weight", "bold")
           .attr("font-size", "0.85rem")
           .text(yAxisLabel)
       );
 
     divRef.current.appendChild(svg.node()!);
-  }, [width, height, xAxisLabel, yAxisLabel, binInterval, data, style]);
+  }, [
+    width,
+    height,
+    xAxisLabel,
+    yAxisLabel,
+    yNumOfTicks,
+    xTickLabelInterval,
+    binInterval,
+    data,
+    style,
+  ]);
 
   return <div ref={divRef} />;
 }

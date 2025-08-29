@@ -4,7 +4,7 @@ import { SelectMenu } from "./components/select/component";
 import { InputField } from "./components/input/component";
 import { Histogram } from "./components/visualization/histogram/component";
 
-import type { Prediction, PredictionInputs } from "./Interface";
+import type { Predictions, PredictionsInputs } from "./Interface";
 
 import "./App.css";
 
@@ -13,10 +13,10 @@ function App() {
 
   // represent the actual state of the input fields. These are separate to prevent memory thrashing
   // due to constant changing properties. for instance, 'square feet' is typed, and each change would invoke the state setter.
-  const [squareFeet, setSquareFeet] = useState<number | null>(null);
-  const [numOfBedrooms, setNumOfBedrooms] = useState<number | null>(null);
-  const [numOfBathrooms, setNumOfBathrooms] = useState<number | null>(null);
-  const [neighborhoodType, setNeighborhoodType] = useState<string | null>(null);
+  const [squareFeet, setSquareFeet] = useState<number>(1000);
+  const [numOfBedrooms, setNumOfBedrooms] = useState<number>(2);
+  const [numOfBathrooms, setNumOfBathrooms] = useState<number>(1);
+  const [neighborhoodType, setNeighborhoodType] = useState<string>("Rural");
 
   // square feet input field constraint validation
   const [isEmpty, setIsEmpty] = useState<boolean>(true); // so that constraint validation doesn't flag in an empty field, while at the same time disabling the submit button
@@ -25,11 +25,11 @@ function App() {
   const predictionRequestRef = useRef<Promise<void> | null>(null); // used to prevent rapid click race condition; sidesteps any split hairs of the react rendering lifecycle
   const [predictionIsPending, setPredictionIsPending] =
     useState<boolean>(false); // used as part of disabling the submit button
-  const [prediction, setPrediction] = useState<Prediction | null>(null); // the actual prediction data as fetched on submission
+  const [prediction, setPrediction] = useState<Predictions | null>(null); // the actual prediction data as fetched on submission
 
   // the values supplied as part of the prediction above. This holistic rather than separate, because this value is not directly
   // invoked or changed by, say, the user actively typing in the input fields.
-  const [predInputs, setPredInputs] = useState<PredictionInputs | null>(null);
+  const [predInputs, setPredInputs] = useState<PredictionsInputs | null>(null);
 
   return (
     <div className="flex flex-col items-center">
@@ -155,6 +155,9 @@ function App() {
                 if (!predictionRequestRef.current) {
                   predictionRequestRef.current = fetch("/predict", {
                     method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
                     body: JSON.stringify({
                       SquareFeet: squareFeet,
                       Bedrooms: numOfBedrooms,
@@ -162,9 +165,13 @@ function App() {
                       Neighborhood: neighborhoodType,
                     }),
                   })
-                    .then((res) => res.json())
-                    .then((data) => {
-                      setPrediction(data as Prediction);
+                    .then((res) => {
+                      if (res.ok) return res.json();
+                    })
+                    .then((data: Predictions) => {
+                      console.log(`Received data: ${JSON.stringify(data)}`);
+
+                      setPrediction(data);
                       setPredInputs({
                         squareFeet: squareFeet!,
                         numOfBedrooms: numOfBedrooms!,
@@ -197,7 +204,7 @@ function App() {
           <>
             <div className="mb-8">
               <h1 className="text-center align-middle text-2xl">Inputs</h1>
-              <ul>
+              <ul className="flex">
                 <li>SquareFeet: {predInputs.squareFeet} +-50 Gaussian Noise</li>
                 <li>Number of Bedrooms: {predInputs.numOfBedrooms}</li>
                 <li>Number of Bathrooms: {predInputs.numOfBathrooms}</li>
@@ -213,7 +220,9 @@ function App() {
                 height={450}
                 xAxisLabel="Price Ranges"
                 yAxisLabel="Number of Occurences"
-                binInterval={1}
+                yNumOfTicks={15}
+                xTickLabelInterval={4}
+                binInterval={1000}
                 data={prediction.price_predictions}
                 style={"" as React.CSSProperties}
               />
@@ -234,10 +243,12 @@ function App() {
               </p>
               <Histogram
                 width={700}
-                height={450}
+                height={550}
                 xAxisLabel="Square Feet Ranges"
                 yAxisLabel="Number of Occurences"
-                binInterval={1}
+                yNumOfTicks={15}
+                xTickLabelInterval={1}
+                binInterval={25}
                 data={
                   // [1, 1, 1, 2, 2, 3, 3, 3, 3, 3, 4, 5, 7, 8, 8]
                   prediction.gaussian_noisy_square_feet

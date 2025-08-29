@@ -5,6 +5,8 @@ export interface Histogram_Interface {
   height: number;
   xAxisLabel: string;
   yAxisLabel: string;
+  yNumOfTicks: number;
+  xTickLabelInterval: number;
   binInterval: number;
   data: Data;
   style: React.CSSProperties;
