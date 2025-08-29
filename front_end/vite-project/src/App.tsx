@@ -152,7 +152,7 @@ function App() {
               onClick={(e) => {
                 e.stopPropagation();
 
-                if (!predictionRequestRef.current) {
+                if (predictionRequestRef.current === null) {
                   predictionRequestRef.current = fetch("/predict", {
                     method: "POST",
                     headers: {
@@ -202,24 +202,57 @@ function App() {
       <div className="mb-8 flex flex-col items-center justify-center w-[450px] mt-[128px] mb-[64px">
         {prediction && predInputs && (
           <>
-            <div className="mb-8">
-              <h1 className="text-center align-middle text-2xl">Inputs</h1>
-              <ul className="flex">
-                <li>SquareFeet: {predInputs.squareFeet} +-50 Gaussian Noise</li>
-                <li>Number of Bedrooms: {predInputs.numOfBedrooms}</li>
-                <li>Number of Bathrooms: {predInputs.numOfBathrooms}</li>
-                <li>Neighborhood Type: {predInputs.neighborhoodType}</li>
+            <div className="mb-10 flex flex-col items-center justify-center">
+              <h1 className="text-center align-middle text-2xl mb-4">
+                Inputs Of Predictions Below
+              </h1>
+              <ul className="text-sm">
+                <li>
+                  <span className="font-bold">SquareFeet:</span>{" "}
+                  {predInputs.squareFeet} +-50 Gaussian Noise
+                </li>
+                <li>
+                  <span className="font-bold">Number of Bedrooms:</span>{" "}
+                  {predInputs!.numOfBedrooms}
+                </li>
+                <li>
+                  <span className="font-bold">Number of Bathrooms:</span>{" "}
+                  {predInputs.numOfBathrooms}
+                </li>
+                <li>
+                  <span className="font-bold">Neighborhood Type:</span>{" "}
+                  {predInputs.neighborhoodType}
+                </li>
               </ul>
             </div>
             <div className="mb-8">
-              <h1 className="text-center align-middle text-2xl">
-                Prediction Spread
+              <h1 className="text-center align-middle text-2xl mb-4">
+                Predictions
               </h1>
+              <div>
+                <h2 className="text-sm font-bold mb-2">Axes Meanings</h2>
+                <ul className="text-sm">
+                  <li>
+                    <span className="font-bold">{'x = "Price Ranges"'}</span>
+                    {
+                      ' = each space between a tick effectively represents "tick1 <= x < tick2" price range buckets ($)'
+                    }
+                  </li>
+                  <li>
+                    <span className="font-bold">
+                      {'y = "Number of Examples"'}
+                    </span>
+                    {
+                      " = the number of examples given the bin. The area formed by the bars effectively represents probability of occurence for the given bin."
+                    }
+                  </li>
+                </ul>
+              </div>
               <Histogram
                 width={700}
                 height={450}
-                xAxisLabel="Price Ranges"
-                yAxisLabel="Number of Occurences"
+                xAxisLabel="Price Ranges ($)"
+                yAxisLabel="Number of Examples"
                 yNumOfTicks={15}
                 xTickLabelInterval={4}
                 binInterval={1000}
@@ -231,7 +264,7 @@ function App() {
               <h1 className="text-center align-middle mb-4 text-2xl">
                 Square Feet Uncertainty Range Used
               </h1>
-              <p className="text-sm">
+              <p className="text-sm mb-4">
                 The prediction uses gradient boosted regression. This method is
                 robust, but unfortunately deterministic, as opposed to the
                 stochastic nature related to this task. To produce a more
@@ -241,18 +274,36 @@ function App() {
                 This also means submitting the same combination of inputs may
                 not yield the same output.
               </p>
+              <div>
+                <h2 className="text-sm font-bold mb-2">Axes Meanings</h2>
+                <ul className="text-sm">
+                  <li>
+                    <span className="font-bold">
+                      {'x = "Square Feet Ranges"'}
+                    </span>
+                    {
+                      ' = each space between a tick effectively represents "tick1 <= x < tick2" square footage buckets.'
+                    }
+                  </li>
+                  <li>
+                    <span className="font-bold">
+                      {'y = "Number of Examples"'}
+                    </span>
+                    {
+                      " = the number of examples given the bin. The area formed by the bars effectively represents probability of occurence for the given bin."
+                    }
+                  </li>
+                </ul>
+              </div>
               <Histogram
                 width={700}
                 height={550}
                 xAxisLabel="Square Feet Ranges"
-                yAxisLabel="Number of Occurences"
+                yAxisLabel="Number of Examples"
                 yNumOfTicks={15}
                 xTickLabelInterval={1}
                 binInterval={25}
-                data={
-                  // [1, 1, 1, 2, 2, 3, 3, 3, 3, 3, 4, 5, 7, 8, 8]
-                  prediction.gaussian_noisy_square_feet
-                }
+                data={prediction.gaussian_noisy_square_feet}
                 style={"" as React.CSSProperties}
               />
             </div>

@@ -91,7 +91,6 @@ function Histogram({
           .attr("text-anchor", "end")
           .attr("font-weight", "bold")
           .attr("font-size", "0.85rem")
-          .attr("transform", "rotate(70)") // Rotate for vertical orientation
           .text(xAxisLabel)
       );
 
