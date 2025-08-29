@@ -2,11 +2,12 @@ from typing import List
 import copy as cp
 import numpy as np
 from marshmallow import ValidationError
+from back_end.custom_logging.log_factory.interface import LogFactory as LogFactory_Interface
 from ..interface import PredictionInput, PredictionOutput, Predictor as Predictor_Interface
 from .interface import MonteCarlo as MonteCarlo_Interface, MonteCarloOutput, ConstructorArgs, PredictArgs
 
 class MonteCarlo(MonteCarlo_Interface):
-    def __init__(self, logger, predictor: Predictor_Interface, seed: int=1, noise_std: int=1, num_of_samples_min: int=1, num_of_samples_max: int=1000):
+    def __init__(self, logger: LogFactory_Interface, predictor: Predictor_Interface, seed: int=1, noise_std: int=1, num_of_samples_min: int=1, num_of_samples_max: int=1000):
         self._validate_constructor_args(seed=seed, noise_std=noise_std, num_of_samples_min=num_of_samples_min, num_of_samples_max=num_of_samples_max)
                 
         self.logger=logger
@@ -61,14 +62,14 @@ class MonteCarlo(MonteCarlo_Interface):
         self._validate_input(input=input, num_of_samples=num_of_samples)
         
         # create a bunch of predictions with applied noise. 
-        noisy_inputs=[]
+        noisy_square_feet=[]
         noisy_price_predictions:List[PredictionOutput]=[]
         
         for _ in range(num_of_samples):
             noisy_input=self._create_noisy_input(input=input)
-            noisy_inputs.append(noisy_input)
+            noisy_square_feet.append(noisy_input["SquareFeet"])
             noisy_price_prediction=self.predictor.predict(input=noisy_input)
-            noisy_price_predictions.append(noisy_price_prediction)
+            noisy_price_predictions.append(noisy_price_prediction["price_prediction"])
             
-        return { "price_predictions": noisy_price_predictions, "noisy_inputs": noisy_inputs}
+        return { "price_predictions": noisy_price_predictions, "gaussian_noisy_square_feet": noisy_square_feet}
         

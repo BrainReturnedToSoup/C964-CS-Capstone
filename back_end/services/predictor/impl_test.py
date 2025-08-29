@@ -1,5 +1,5 @@
 import numpy as np
-from custom_logging.instance import logger
+from back_end.custom_logging.instance import logger
 from .static import model_assets
 from .impl import Predictor
 from .preprocessor import Preprocessor

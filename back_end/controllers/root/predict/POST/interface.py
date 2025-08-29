@@ -19,4 +19,4 @@ class RequestBody(Schema):
 class ResponseBody(TypedDict):
     # the following output lists should be indexed matched
     price_predictions: List[float]
-    noisy_inputs: List[float] # noisy Square feet values essentially
+    gaussian_noisy_square_feet: List[float] # noisy Square feet values essentially

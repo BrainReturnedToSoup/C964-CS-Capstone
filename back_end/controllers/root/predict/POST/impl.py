@@ -2,8 +2,8 @@ from flask import Request, Response
 from http import HTTPStatus
 import json
 from marshmallow import ValidationError
-from custom_logging.log_factory.interface import LogFactory as LogFactory_Interface
-from services.predictor.monte_carlo.interface import MonteCarlo as MonteCarlo_Interface
+from back_end.custom_logging.log_factory.interface import LogFactory as LogFactory_Interface
+from back_end.services.predictor.monte_carlo.interface import MonteCarlo as MonteCarlo_Interface
 from .interface import RequestBody, ResponseBody
 from .errors import NotSecureError, InvalidContentTypeError
 from .enums import LogKeys, LogVals
@@ -42,9 +42,11 @@ class Controller:
             # run the prediction
             prediction=self.monte_carlo_predictor.predict(request_body, num_of_samples=self.num_of_samples)
             
+            
+            
             response_body:ResponseBody={
                 "price_predictions": prediction["price_predictions"],
-                "noisy_inputs": prediction["noisy_inputs"]
+                "gaussian_noisy_square_feet": prediction["gaussian_noisy_square_feet"]
             }
             
             response_body_jsonified:str=json.dumps(obj=response_body)

@@ -2,7 +2,7 @@ import numpy as np
 from .interface import NEIGHBORHOOD
 from .static import model_assets
 from .preprocessor import Preprocessor
-from custom_logging.instance import logger
+from back_end.custom_logging.instance import logger
 
 def test_convert_to_ordered_df():
     preprocesser=Preprocessor(logger=logger, prefit_scaler=model_assets.prefit_scaler, columns=model_assets.pretrained_gradient_boosted_regressor.feature_names_in_)

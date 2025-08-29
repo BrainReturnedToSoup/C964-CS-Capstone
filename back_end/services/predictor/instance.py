@@ -1,4 +1,4 @@
-from custom_logging.instance import logger
+from back_end.custom_logging.instance import logger
 from .static import model_assets
 from .preprocessor import Preprocessor
 from .impl import Predictor

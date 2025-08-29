@@ -1,6 +1,6 @@
 from http import HTTPStatus
 from flask import Request, Response, render_template
-from custom_logging.log_factory.interface import LogFactory as LogFactory_Interface
+from back_end.custom_logging.log_factory.interface import LogFactory as LogFactory_Interface
 from .errors import NotSecureError
 from .enum import LogKeys, LogVals
 

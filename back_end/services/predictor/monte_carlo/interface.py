@@ -7,7 +7,7 @@ from ..interface import PredictionInput, PredictionOutput
 class MonteCarloOutput(TypedDict):
     # the following output lists should be indexed matched
     price_predictions: List[PredictionOutput]
-    noisy_inputs: List[float] # noisy Square feet values essentially
+    gaussian_noisy_square_feet: List[float] # noisy Square feet values essentially
 
 class ConstructorArgs(Schema):
     seed=fields.Integer(required=True, validate=validate.Range(min=0, max=None))

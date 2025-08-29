@@ -1,8 +1,8 @@
 from http import HTTPStatus
 from unittest.mock import Mock
 from .impl import Controller
-from services.predictor.monte_carlo.instance import monte_carlo_predictor
-from custom_logging.instance import logger
+from back_end.services.predictor.monte_carlo.instance import monte_carlo_predictor
+from back_end.custom_logging.instance import logger
 
 def test_handle():
     controller=Controller(logger=logger, monte_carlo_predictor=monte_carlo_predictor, num_of_samples=100)  
@@ -24,7 +24,7 @@ def test_handle():
     assert response.status_code == int(HTTPStatus.OK)
     assert response.content_type == "application/json"
     assert "price_predictions" in response.get_json()
-    assert "noisy_inputs" in response.get_json()
+    assert "gaussian_noisy_square_feet" in response.get_json()
     
     invalid_req_1=Mock()
     invalid_req_1.is_secure=False # invalid

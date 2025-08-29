@@ -1,13 +1,13 @@
 import pytest
 from marshmallow import ValidationError
 import numpy as np
+from back_end.custom_logging.instance import logger
 from ..static import model_assets
 from ..interface import PredictionInput
 from ..impl import Predictor
 from ..preprocessor import Preprocessor
 from .impl import MonteCarlo
 from .interface import MonteCarloOutput
-from custom_logging.instance import logger
 
 def test_validate_constructor_args():
     preprocessor=Preprocessor(logger=logger, prefit_scaler=model_assets.prefit_scaler, columns=model_assets.pretrained_gradient_boosted_regressor.feature_names_in_)
@@ -175,3 +175,4 @@ def test_predict():
     monte_carlo_output:MonteCarloOutput=mcp.predict(input=mock_input, num_of_samples=num_of_samples)
     
     assert len(monte_carlo_output["price_predictions"]) == num_of_samples
+    assert len(monte_carlo_output["gaussian_noisy_square_feet"]) == num_of_samples

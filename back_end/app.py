@@ -1,8 +1,10 @@
 from flask import Flask
 from pathlib import Path
-from controllers.root.bp import bp as root_bp
+from back_end.controllers.root.bp import bp as root_bp
 
-template_folder_path=Path(__file__).parent / "templates"
+parent_path=Path(__file__).parent
+template_folder_path=parent_path / "templates"
+ssl_context_path=parent_path / "static" / "https_assets"
 
 def create_app():
     app = Flask(__name__, template_folder=template_folder_path)
@@ -13,4 +15,4 @@ def create_app():
     return app
 
 if __name__ == "__main__":
-    create_app().run(debug=True)
+    create_app().run(ssl_context="adhoc")

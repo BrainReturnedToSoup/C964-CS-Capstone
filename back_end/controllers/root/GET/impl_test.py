@@ -1,7 +1,7 @@
 from http import HTTPStatus
 from pathlib import Path
 from unittest.mock import Mock
-from custom_logging.instance import logger
+from back_end.custom_logging.instance import logger
 from .impl import Controller
 
 path=Path(__file__).resolve().parent.parent.parent

@@ -1,6 +1,6 @@
 from marshmallow import ValidationError
 from sklearn.ensemble import GradientBoostingRegressor
-from custom_logging.log_factory.interface import LogFactory as LogFactory_Interface
+from back_end.custom_logging.log_factory.interface import LogFactory as LogFactory_Interface
 from .interface import  PredictionInput, PredictionOutput, Predictor as Predictor_Interface, Preprocessor as Preprocessor_Interface
 
 # no point in injecting the model, scaler, etc.

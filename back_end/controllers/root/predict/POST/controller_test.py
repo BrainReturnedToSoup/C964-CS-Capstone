@@ -13,4 +13,4 @@ def test_controller(test_client):
     assert response.status_code == HTTPStatus.OK
     
     assert "price_predictions" in response.json
-    assert "noisy_inputs" in response.json
+    assert "gaussian_noisy_square_feet" in response.json

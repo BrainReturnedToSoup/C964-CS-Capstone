@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-from custom_logging.log.interface import Log as Log_Interface
-from custom_logging.handler.interface import Handler as Handler_Interface
+from ..log.interface import Log as Log_Interface
+from ..handler.interface import Handler as Handler_Interface
 
 class LogFactory(ABC):
     @abstractmethod

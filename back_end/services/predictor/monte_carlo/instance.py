@@ -1,5 +1,5 @@
 from .impl import MonteCarlo 
-from custom_logging.instance import logger
+from back_end.custom_logging.instance import logger
 from ..instance import predictor
 
 seed=18759127513

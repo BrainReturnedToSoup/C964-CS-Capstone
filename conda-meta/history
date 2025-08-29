@@ -261,3 +261,10 @@
 # conda version: 25.7.0
 -conda-forge/noarch::pytest-dependency-0.5.1-pyhd8ed1ab_1
 # remove specs: ['pytest-dependency']
+==> 2025-08-29 02:42:04 <==
+# cmd: C:\Users\minto\miniconda3\Scripts\conda-script.py install cryptography
+# conda version: 25.7.0
++defaults/noarch::pycparser-2.21-pyhd3eb1b0_0
++defaults/win-64::cffi-1.17.1-py313h827c3e9_1
++defaults/win-64::cryptography-45.0.5-py313hcaec639_0
+# update specs: ['cryptography']

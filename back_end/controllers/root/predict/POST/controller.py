@@ -1,7 +1,7 @@
-from flask import request, Response, Blueprint
+from flask import request, Blueprint
 from .impl import Controller
-from custom_logging.instance import logger
-from services.predictor.monte_carlo.instance import monte_carlo_predictor
+from back_end.custom_logging.instance import logger
+from back_end.services.predictor.monte_carlo.instance import monte_carlo_predictor
 
 bp=Blueprint("predict-POST", import_name=__name__)
 
