@@ -28,27 +28,27 @@ def test_validate_constructor_args():
     # invalid seed
     with pytest.raises(ValidationError) as e:
         mcp._validate_constructor_args(seed=invalid_seed, noise_std=valid_noise_std, num_of_samples_min=valid_num_of_samples_min, num_of_samples_max=valid_num_of_samples_max)
-    assert "monte-carlo-predicter-service" in str(e.value)
+    assert "monte-carlo-predictor-service" in str(e.value)
     
     # invalid noise_std
     with pytest.raises(ValidationError) as e:
         mcp._validate_constructor_args(seed=valid_seed, noise_std=invalid_noise_std, num_of_samples_min=valid_num_of_samples_min, num_of_samples_max=valid_num_of_samples_max)
-    assert "monte-carlo-predicter-service" in str(e.value)
+    assert "monte-carlo-predictor-service" in str(e.value)
     
     # invalid num_of_samples_min
     with pytest.raises(ValidationError) as e:
         mcp._validate_constructor_args(seed=valid_seed, noise_std=valid_noise_std, num_of_samples_min=invalid_num_of_samples_min, num_of_samples_max=valid_num_of_samples_max)
-    assert "monte-carlo-predicter-service" in str(e.value)
+    assert "monte-carlo-predictor-service" in str(e.value)
     
     # invalid num_of_samples_max due to out-of-range (min==1)
     with pytest.raises(ValidationError) as e:
         mcp._validate_constructor_args(seed=valid_seed, noise_std=valid_noise_std, num_of_samples_min=valid_num_of_samples_min, num_of_samples_max=invalid_num_of_samples_max)   
-    assert "monte-carlo-predicter-service" in str(e.value)
+    assert "monte-carlo-predictor-service" in str(e.value)
        
     # invalid num_of_samples_max due to out-of-range (max<min) ()
     with pytest.raises(ValidationError) as e:
         mcp._validate_constructor_args(seed=valid_seed, noise_std=valid_noise_std, num_of_samples_min=5, num_of_samples_max=3)
-    assert "monte-carlo-predicter-service" in str(e.value)
+    assert "monte-carlo-predictor-service" in str(e.value)
     
 def test_validate_input():
     preprocessor=Preprocessor(logger=logger, prefit_scaler=model_assets.prefit_scaler, columns=model_assets.pretrained_gradient_boosted_regressor.feature_names_in_)
@@ -94,33 +94,33 @@ def test_validate_input():
     # invalid input given the mock
     with pytest.raises(ValidationError) as e:
         mcp._validate_input(invalid_input_1, num_of_samples=2)
-    assert "monte-carlo-predicter-service" in str(e.value)
+    assert "monte-carlo-predictor-service" in str(e.value)
     
     # invalid input given the mock
     with pytest.raises(ValidationError) as e:
         mcp._validate_input(invalid_input_2, num_of_samples=2)
-    assert "monte-carlo-predicter-service" in str(e.value)
+    assert "monte-carlo-predictor-service" in str(e.value)
 
     # invalid input given the mock
     with pytest.raises(ValidationError) as e:
         mcp._validate_input(invalid_input_3, num_of_samples=2)
-    assert "monte-carlo-predicter-service" in str(e.value)
+    assert "monte-carlo-predictor-service" in str(e.value)
 
 
     # invalid num_of_samples given the mock, num_of_samples == 0
     with pytest.raises(ValidationError) as e:
         mcp._validate_input(valid_but_out_of_order_input, num_of_samples=0)
-    assert "monte-carlo-predicter-service" in str(e.value)
+    assert "monte-carlo-predictor-service" in str(e.value)
     
     # invalid num_of_samples given the mock, num_of_samples < min
     with pytest.raises(ValidationError) as e:
         mcp._validate_input(valid_but_out_of_order_input, num_of_samples=1)
-    assert "monte-carlo-predicter-service" in str(e.value)
+    assert "monte-carlo-predictor-service" in str(e.value)
     
     # invalid num_of_samples given the mock, num_of_samples > max
     with pytest.raises(ValidationError) as e:
         mcp._validate_input(valid_but_out_of_order_input, num_of_samples=1001)
-    assert "monte-carlo-predicter-service" in str(e.value)
+    assert "monte-carlo-predictor-service" in str(e.value)
     
 
 def test_create_noisy_input():

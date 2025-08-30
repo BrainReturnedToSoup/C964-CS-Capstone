@@ -26,7 +26,7 @@ class MonteCarlo(MonteCarlo_Interface):
         try:
             constructor_args_schema.load({"seed": seed, "noise_std": noise_std, "num_of_samples_min": num_of_samples_min, "num_of_samples_max": num_of_samples_max})
         except ValidationError as e:
-            e.messages["origin"]="monte-carlo-predicter-service"
+            e.messages["origin"]="monte-carlo-predictor-service"
             raise e
         
     # treat the rand generation as a transaction. np.random is global, so the class instance needs to maintain 
@@ -55,7 +55,7 @@ class MonteCarlo(MonteCarlo_Interface):
         try:
             predict_args_schema.load({"input": input, "num_of_samples": num_of_samples})
         except ValidationError as e:
-            e.messages["origin"]="monte-carlo-predicter-service"
+            e.messages["origin"]="monte-carlo-predictor-service"
             raise e
         
     def predict(self, input: PredictionInput, num_of_samples: int) -> MonteCarloOutput:
