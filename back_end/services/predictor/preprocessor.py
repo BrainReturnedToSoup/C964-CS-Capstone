@@ -5,6 +5,11 @@ from sklearn.preprocessing import StandardScaler
 from back_end.custom_logging.log_factory.interface import LogFactory as LogFactory_Interface
 from .interface import PredictionInput, NEIGHBORHOOD, Preprocessor as Preprocessor_Interface
 
+# The preprocessor will be responsible for:
+#   converting string-based neighborhood-type values into integers
+#   Scaling input to match the scale of the training set
+#   converting the input to a dataframe with columns matching what the ML model expects
+
 class Preprocessor(Preprocessor_Interface):
     def __init__(self, logger: LogFactory_Interface, prefit_scaler: StandardScaler, columns: List[str]):
         self.logger=logger

@@ -7,8 +7,6 @@ from back_end.services.predictor.monte_carlo.interface import MonteCarlo as Mont
 from .interface import RequestBody, ResponseBody
 from .errors import NotSecureError, InvalidContentTypeError
 from .enums import LogKeys, LogVals
-
-# Response constructor is injected so that I can make a mock and make test assertions on the response
 class Controller:
     def __init__(self, logger: LogFactory_Interface, monte_carlo_predictor: MonteCarlo_Interface, num_of_samples: int):
         self.logger=logger

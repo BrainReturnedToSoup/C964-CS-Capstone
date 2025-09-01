@@ -7,8 +7,6 @@ from .interface import  PredictionInput, PredictionOutput, Predictor as Predicto
 # the methods in the class are way too coupled to the particular ML model for that to matter.
 # plus, python doesn't really have any real encapsulation.
 
-# In the future, look into scikit-learn pipelines, instead of this more manual approach. 
-
 class Predictor(Predictor_Interface):
     def __init__(self, logger: LogFactory_Interface, pretrained_model: GradientBoostingRegressor, preprocessor: Preprocessor_Interface):
         self.logger=logger
@@ -16,7 +14,7 @@ class Predictor(Predictor_Interface):
         self.preprocessor=preprocessor
     
     # will throw an error if input fails to match the Prediction_Input schema.
-    # Python's type hints are so weak, that I am validating manually to reduce the amount of tests I have to make
+    # Python's type hints are not actually enforced by the language. For that I am validating manually to reduce the amount of tests I have to make
     # to ensure proper behavior. This is especially important, considering potential nightmare bugs due to invalid model input data
     # because someone messed up up the stream (me)
     def _validate_input(self, input: PredictionInput) -> None:

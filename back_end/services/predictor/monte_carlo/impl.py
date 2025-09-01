@@ -6,6 +6,12 @@ from back_end.custom_logging.log_factory.interface import LogFactory as LogFacto
 from ..interface import PredictionInput, PredictionOutput, Predictor as Predictor_Interface
 from .interface import MonteCarlo as MonteCarlo_Interface, MonteCarloOutput, ConstructorArgs, PredictArgs
 
+# The purpose of this class is to run multiple predictions, where each input is
+# essentially a base input with added noise (Gaussian noise). The reason to do this, is
+# because gradient boosted regressor models are both deterministic once they are trained.
+# This is not ideal for this project, because without monte carlo, you will essentially be 
+# dependent on a single, discrete output, which is risky in the context of housing prices and real estate.
+
 class MonteCarlo(MonteCarlo_Interface):
     def __init__(self, logger: LogFactory_Interface, predictor: Predictor_Interface, seed: int=1, noise_std: int=1, num_of_samples_min: int=1, num_of_samples_max: int=1000):
         self._validate_constructor_args(seed=seed, noise_std=noise_std, num_of_samples_min=num_of_samples_min, num_of_samples_max=num_of_samples_max)
@@ -46,7 +52,7 @@ class MonteCarlo(MonteCarlo_Interface):
         return copy
 
     # will throw an error if input fails to match the Prediction_Input schema.
-    # Python's type hints are so weak, that I am validating manually to reduce the amount of tests I have to make
+    # Python's type hints are not actually enforced by the language. For that I am validating manually to reduce the amount of tests I have to make
     # to ensure proper behavior. This is especially important, considering potential nightmare bugs due to invalid model input data
     # because someone messed up up the stream (me)
     def _validate_input(self, input: PredictionInput, num_of_samples: int) -> None:

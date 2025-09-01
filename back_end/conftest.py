@@ -4,6 +4,5 @@ import pytest
 @pytest.fixture
 def test_client():
     app = create_app()
-    print("App in fixture:", id(app))
     with app.test_client() as client:
         yield client
